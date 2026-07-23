@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía Completa: Poleas, Palancas y Engranajes - Grado 7°</title>
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+        font-family: 'Segoe UI', Arial, sans-serif;
+        background: #f0f2f5;
+        color: #1a1a2e;
+        line-height: 1.7;
+    }
+    .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+    
+    /* PORTADA */
+    .portada {
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #0f3460 100%);
+        color: white; padding: 60px 40px; border-radius: 15px; text-align: center;
+        margin-bottom: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+    .portada h1 { font-size: 2.5em; margin-bottom: 10px; }
+    .portada h2 { font-size: 1.3em; font-weight: 400; opacity: 0.9; margin-bottom: 20px; }
+    .portada .datos {
+        background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px;
+        margin-top: 20px; text-align: left; max-width: 400px; margin-left: auto; margin-right: auto;
+    }
+    .portada .datos input {
+        width: 100%; padding: 10px; margin: 5px 0; border: none; border-radius: 6px;
+        font-size: 1em; background: rgba(255,255,255,0.9);
+    }
+    
+    /* SECCIONES */
+    .seccion {
+        background: white; border-radius: 12px; padding: 30px; margin-bottom: 30px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+    .seccion h2 {
+        color: #0f3460; font-size: 1.6em; border-bottom: 3px solid #e94560;
+        padding-bottom: 8px; margin-bottom: 20px;
+    }
+    .seccion h3 {
+        color: #16213e; font-size: 1.2em; margin: 20px 0 10px 0;
+        background: #f0f2f5; padding: 8px 15px; border-radius: 6px;
+    }
+    .seccion h4 { color: #0f3460; margin: 15px 0 5px 0; font-size: 1.05em; }
+    
+    /* TABLAS */
+    table {
+        width: 100%; border-collapse: collapse; margin: 15px 0;
+        font-size: 0.95em;
+    }
+    th, td { border: 1px solid #dee2e6; padding: 10px; text-align: left; }
+    th { background: #0f3460; color: white; font-weight: 600; }
+    tr:nth-child(even) { background: #f8f9fa; }
+    
+    /* CUADROS DE FORMULAS */
+    .formula-box {
+        background: #e8f4fd; border-left: 5px solid #0f3460;
+        padding: 15px; margin: 15px 0; border-radius: 0 8px 8px 0;
+        font-size: 1.05em;
+    }
+    .formula-box strong { color: #e94560; }
+    
+    /* EJEMPLOS */
+    .ejemplo {
+        background: #fef9e7; border-left: 5px solid #f1c40f;
+        padding: 15px; margin: 15px 0; border-radius: 0 8px 8px 0;
+    }
+    .ejemplo strong { color: #d4a017; }
+    
+    /* INFO BOX */
+    .info-box {
+        background: #e8f5e9; border-left: 5px solid #28a745;
+        padding: 15px; margin: 15px 0; border-radius: 0 8px 8px 0;
+    }
+    .warning-box {
+        background: #fbe9e7; border-left: 5px solid #e94560;
+        padding: 15px; margin: 15px 0; border-radius: 0 8px 8px 0;
+    }
+    
+    /* EJERCICIOS */
+    .ejercicio {
+        background: #f8f9fa; border: 1px solid #dee2e6;
+        padding: 20px; margin: 15px 0; border-radius: 10px;
+        border-left: 4px solid #e94560;
+    }
+    .ejercicio .num { font-weight: 700; color: #e94560; }
+    
+    /* EVALUACION */
+    .pregunta {
+        background: #f8f9fa; border: 1px solid #dee2e6;
+        padding: 20px; margin: 15px 0; border-radius: 10px;
+        border-left: 4px solid #0f3460;
+    }
+    .pregunta .qtext { font-weight: 600; margin-bottom: 10px; font-size: 1.05em; }
+    .pregunta .opts { padding-left: 20px; }
+    .pregunta .opts div { margin: 5px 0; }
+    .pregunta .opts input { margin-right: 10px; }
+    
+    .respuesta { display: none; margin-top: 10px; padding: 10px; background: #d4edda; border-radius: 6px; }
+    .pregunta.mostrar-respuesta .respuesta { display: block; }
+    
+    /* BOTONES */
+    .btn {
+        display: inline-block; padding: 12px 30px; border: none; border-radius: 8px;
+        font-size: 1em; font-weight: 600; cursor: pointer; margin: 5px;
+        transition: all 0.3s;
+    }
+    .btn-primary { background: #0f3460; color: white; }
+    .btn-primary:hover { background: #1a5276; transform: translateY(-2px); }
+    .btn-danger { background: #e94560; color: white; }
+    .btn-danger:hover { background: #c23152; transform: translateY(-2px); }
+    .btn-success { background: #28a745; color: white; }
+    .btn-success:hover { background: #218838; transform: translateY(-2px); }
+    .btn-warning { background: #f39c12; color: white; }
+    .btn-warning:hover { background: #d68910; transform: translateY(-2px); }
+    
+    /* RESULTADO */
+    .resultado {
+        display: none; background: linear-gradient(135deg, #0f3460, #1a5276);
+        color: white; padding: 30px; border-radius: 12px; text-align: center;
+        margin: 20px 0;
+    }
+    .resultado.mostrar { display: block; }
+    .resultado .nota { font-size: 4em; font-weight: 800; margin: 10px 0; }
+    .resultado .nota.aprobado { color: #ffd700; }
+    .resultado .nota.reprobado { color: #ff6b6b; }
+    
+    ul, ol { padding-left: 25px; margin: 10px 0; }
+    li { margin: 5px 0; }
+    
+    @media print {
+        .btn, .no-print { display: none !important; }
+        .portada { background: #1a1a2e !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        th { background: #0f3460 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .seccion { break-inside: avoid; }
+        body { background: white; }
+    }
+    @media (max-width: 600px) {
+        .portada h1 { font-size: 1.8em; }
+        .seccion { padding: 20px; }
+        table { font-size: 0.85em; }
+        th, td { padding: 6px; }
+    }
+    
+    .toc { background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
+    .toc ol { padding-left: 20px; }
+    .toc li { margin: 8px 0; }
+    .toc a { color: #0f3460; text-decoration: none; font-weight: 500; }
+    .toc a:hover { text-decoration: underline; color: #e94560; }
+    
+    .figura {
+        text-align: center; margin: 15px 0; padding: 15px;
+        background: #f8f9fa; border-radius: 8px; border: 1px dashed #ccc;
+        font-style: italic; color: #666;
+    }
+</style>
+</head>
+<body>
+<div class="container" id="app">
+
+<!-- ========== PORTADA ========== -->
+<div class="portada">
+    <h1>🔧 POLEAS, PALANCAS Y ENGRANAJES</h1>
+    <h2>Guía de estudio + Taller práctico + Evaluación tipo ICFES</h2>
+    <p style="font-size:1.1em; opacity:0.9;">Grado 7° - Educación Básica Secundaria - Colombia</p>
+    <div class="datos no-print">
+        <label>Nombre del estudiante:</label>
+        <input type="text" id="nombreEst" placeholder="Escribe aquí tu nombre completo">
+        <label>Curso:</label>
+        <input type="text" id="cursoEst" placeholder="Ej: 7°A">
+        <label>Fecha:</label>
+        <input type="text" id="fechaEst" value="2026">
+    </div>
+</div>
+
+<!-- ========== TABLA DE CONTENIDO ========== -->
+<div class="toc no-print">
+    <h3 style="color:#0f3460;">📑 Contenido</h3>
+    <ol>
+        <li><a href="#seccion1">Parte 1: Poleas</a></li>
+        <li><a href="#seccion2">Parte 2: Palancas</a></li>
+        <li><a href="#seccion3">Parte 3: Engranajes</a></li>
+        <li><a href="#seccion4">Parte 4: Taller práctico</a></li>
+        <li><a href="#seccion5">Parte 5: Evaluación tipo ICFES (20 preguntas)</a></li>
+    </ol>
+</div>
+
+<!-- ============================================================ -->
+<!-- PARTE 1: POLEAS -->
+<!-- ============================================================ -->
+<div class="seccion" id="seccion1">
+<h2>⚙️ PARTE 1: POLEAS</h2>
+
+<h3>1.1 ¿Qué es una polea?</h3>
+<p>Una <strong>polea</strong> es una máquina simple formada por una rueda con una ranura (canal) en su borde, por donde pasa una cuerda, cable o correa. La rueda gira alrededor de un eje central. Las poleas sirven para <strong>cambiar la dirección de una fuerza</strong> y/o <strong>reducir el esfuerzo</strong> necesario para levantar cargas.</p>
+
+<h3>1.2 Partes de una polea</h3>
+<ul>
+    <li><strong>Rueda o disco:</strong> Elemento circular que gira.</li>
+    <li><strong>Canal o garganta:</strong> Ranura por donde se desliza la cuerda.</li>
+    <li><strong>Eje:</strong> Centro sobre el que gira la rueda.</li>
+    <li><strong>Cuerda o cable:</strong> Elemento flexible que transmite la fuerza.</li>
+    <li><strong>Soporte o armadura:</strong> Estructura que sostiene la polea.</li>
+</ul>
+
+<h3>1.3 Tipos de poleas</h3>
+
+<h4>A) Polea fija</h4>
+<p>La polea está sujeta a un punto fijo (techo, viga). Gira pero <strong>no se desplaza</strong>.</p>
+<ul>
+    <li><strong>Fórmula:</strong> <strong>F = R</strong> (Fuerza = Resistencia)</li>
+    <li><strong>Ventaja mecánica:</strong> VM = 1</li>
+    <li><strong>Ventaja:</strong> No reduce la fuerza, pero permite tirar hacia abajo (más cómodo y podemos usar nuestro peso).</li>
+</ul>
+
+<div class="ejemplo">
+    <strong>🔹 Ejemplo cotidiano:</strong> Izar una bandera en un mástil. La polea en la parte superior permite tirar de la cuerda hacia abajo para subir la bandera. Otros ejemplos: pozos de agua, persianas, tendederos.
+</div>
+
+<h4>B) Polea móvil</h4>
+<p>La polea <strong>se desplaza junto con la carga</strong>. Un extremo de la cuerda se fija a un punto fijo y del otro extremo tiramos.</p>
+<ul>
+    <li><strong>Fórmula:</strong> <strong>F = R / 2</strong></li>
+    <li><strong>Ventaja mecánica:</strong> VM = 2</li>
+    <li><strong>Ventaja:</strong> Reduce la fuerza necesaria a la mitad. La carga es soportada por 2 segmentos de cuerda.</li>
+</ul>
+
+<div class="ejemplo">
+    <strong>🔹 Ejemplo cotidiano:</strong> Grúas pequeñas de taller para levantar motores. Si el motor pesa 100 kg, solo necesitas aplicar 50 kg de fuerza.
+</div>
+
+<h4>C) Polipasto (sistema de poleas compuestas)</h4>
+<p>Combinación de <strong>varias poleas fijas y móviles</strong> para obtener mayor ventaja mecánica. Existen dos tipos:</p>
+
+<p><strong>Polipasto potencial (aparejo):</strong></p>
+<ul>
+    <li><strong>Fórmula:</strong> <strong>F = R / (2 × n)</strong> donde <strong>n</strong> = número de poleas móviles</li>
+</ul>
+
+<p><strong>Polipasto exponencial:</strong></p>
+<ul>
+    <li><strong>Fórmula:</strong> <strong>F = R / 2ⁿ</strong> donde <strong>n</strong> = número de poleas móviles</li>
+</ul>
+
+<div class="ejemplo">
+    <strong>🔹 Ejemplo cotidiano:</strong> Grúas de construcción, ascensores, montacargas. Un polipasto de 3 poleas móviles (potencial) reduce la fuerza a 1/6 del peso.
+</div>
+
+<table>
+    <tr><th>Configuración</th><th>Poleas fijas</th><th>Poleas móviles</th><th>VM</th><th>F para R = 600 N</th></tr>
+    <tr><td>Polea fija sola</td><td>1</td><td>0</td><td>1</td><td>600 N</td></tr>
+    <tr><td>Polea móvil simple</td><td>0</td><td>1</td><td>2</td><td>300 N</td></tr>
+    <tr><td>Polipasto 1F + 1M</td><td>1</td><td>1</td><td>2</td><td>300 N</td></tr>
+    <tr><td>Polipasto 2F + 2M</td><td>2</td><td>2</td><td>4</td><td>150 N</td></tr>
+    <tr><td>Polipasto 3F + 3M</td><td>3</td><td>3</td><td>6</td><td>100 N</td></tr>
+</table>
+
+<h3>1.4 Poleas con correa (transmisión circular)</h3>
+<p>Se usan para transmitir movimiento circular entre dos ejes separados. Dos poleas se conectan mediante una correa (banda).</p>
+
+<div class="formula-box">
+    <strong>Fórmula:</strong> D₁ × ω₁ = D₂ × ω₂ &nbsp;|&nbsp; <strong>RT = D₁ / D₂ = ω₂ / ω₁</strong><br>
+    D₁, D₂ = diámetros (cm o m) | ω₁, ω₂ = velocidades (rpm)
+</div>
+
+<p><strong>Tipos según el diámetro:</strong></p>
+<ul>
+    <li><strong>Multiplicador de velocidad:</strong> Polea motriz más grande que la conducida → la conducida gira más rápido.</li>
+    <li><strong>Reductor de velocidad:</strong> Polea motriz más pequeña que la conducida → la conducida gira más lento.</li>
+</ul>
+
+<div class="ejemplo">
+    <strong>🔹 Ejemplo cotidiano:</strong> Máquinas de coser (el pedal mueve una polea grande que hace girar rápido la aguja), motores de automóviles (correa del alternador), taladros de banco.
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PARTE 2: PALANCAS -->
+<!-- ============================================================ -->
+<div class="seccion" id="seccion2">
+<h2>📐 PARTE 2: PALANCAS</h2>
+
+<h3>2.1 ¿Qué es una palanca?</h3>
+<p>Una <strong>palanca</strong> es una máquina simple formada por una <strong>barra rígida</strong> que puede girar alrededor de un punto de apoyo llamado <strong>fulcro</strong>. Permite vencer una resistencia (carga) aplicando una fuerza (potencia) en algún punto de la barra.</p>
+<p><em>"Dadme una barra y un punto de apoyo, y moveré el mundo"</em> — Arquímedes (siglo III a.C.)</p>
+
+<h3>2.2 Elementos de una palanca</h3>
+<ul>
+    <li><strong>Fulcro (F):</strong> Punto de apoyo sobre el que gira la barra.</li>
+    <li><strong>Potencia (P):</strong> Fuerza que se aplica.</li>
+    <li><strong>Resistencia (R):</strong> Fuerza que se quiere vencer (carga o peso).</li>
+    <li><strong>Brazo de potencia (Bp):</strong> Distancia del fulcro al punto donde se aplica la potencia.</li>
+    <li><strong>Brazo de resistencia (Br):</strong> Distancia del fulcro al punto donde actúa la resistencia.</li>
+</ul>
+
+<h3>2.3 Ley de la palanca</h3>
+<div class="formula-box">
+    <strong>P × Bp = R × Br</strong><br>
+    "La potencia multiplicada por su brazo es igual a la resistencia multiplicada por su brazo"
+</div>
+
+<p><strong>Despejes útiles:</strong></p>
+<ul>
+    <li>P = (R × Br) / Bp</li>
+    <li>R = (P × Bp) / Br</li>
+    <li>Bp = (R × Br) / P</li>
+    <li>Br = (P × Bp) / R</li>
+</ul>
+
+<h3>2.4 Tipos de palancas</h3>
+
+<h4>A) Palanca de primer grado (primer género)</h4>
+<p>El <strong>fulcro está entre</strong> la potencia y la resistencia.</p>
+<p><strong>Disposición:</strong> P — F — R</p>
+<ul>
+    <li>Si Bp > Br → multiplica fuerza (P &lt; R)</li>
+    <li>Si Bp &lt; Br → reduce fuerza (P &gt; R)</li>
+    <li>Si Bp = Br → equilibrio (P = R)</li>
+</ul>
+
+<div class="ejemplo">
+    <strong>🔹 Ejemplos colombianos:</strong> Tijeras, alicates, balancín (sube y baja), balanza, martillo sacando clavos, remo de una canoa, catapulta, pala de mano al excavar.
+</div>
+
+<h4>B) Palanca de segundo grado (segundo género)</h4>
+<p>La <strong>resistencia está entre</strong> el fulcro y la potencia.</p>
+<p><strong>Disposición:</strong> F — R — P</p>
+<ul>
+    <li><strong>Siempre</strong> multiplica la fuerza (P &lt; R)</li>
+    <li>Bp siempre es mayor que Br</li>
+</ul>
+
+<div class="ejemplo">
+    <strong>🔹 Ejemplos colombianos:</strong> Carretilla (para cargar escombros o materiales), cascanueces, abridor de botellas, fuelle, prensador de ajos, carro de mercado.
+</div>
+
+<h4>C) Palanca de tercer grado (tercer género)</h4>
+<p>La <strong>potencia está entre</strong> el fulcro y la resistencia.</p>
+<p><strong>Disposición:</strong> F — P — R</p>
+<ul>
+    <li><strong>Siempre</strong> reduce la fuerza (P &gt; R)</li>
+    <li>Permite grandes recorridos y velocidades</li>
+</ul>
+
+<div class="ejemplo">
+    <strong>🔹 Ejemplos colombianos:</strong> Caña de pescar, escoba (al barrer), pinzas de depilar, pala de recoger basura, bate de béisbol, raqueta de tenis, el brazo humano.
+</div>
+
+<table>
+    <tr><th>Tipo</th><th>Disposición</th><th>Ventaja mecánica</th><th>Ejemplos</th></tr>
+    <tr><td>1er grado</td><td>P — F — R</td><td>Variable</td><td>Tijeras, alicates, balancín</td></tr>
+    <tr><td>2do grado</td><td>F — R — P</td><td>Siempre &gt; 1</td><td>Carretilla, cascanueces</td></tr>
+    <tr><td>3er grado</td><td>F — P — R</td><td>Siempre &lt; 1</td><td>Caña de pescar, escoba</td></tr>
+</table>
+
+<div class="info-box">
+    <strong>💡 Dato importante:</strong> En Colombia, las palancas se usan en herramientas tradicionales como la pala para la minería artesanal, los remos para las canoas en la región Pacífica y Amazónica, y la carretilla en construcciones de todo el país.
+</div>
+
+<h3>2.5 El cuerpo humano como palanca</h3>
+<p>Nuestro cuerpo está lleno de palancas. Los huesos actúan como barras rígidas, las articulaciones como fulcros y los músculos aplican la potencia.</p>
+<ul>
+    <li><strong>Brazo (al levantar un objeto):</strong> Palanca de tercer grado (codo = fulcro, músculo = potencia, mano = resistencia).</li>
+    <li><strong>Pierna (al caminar):</strong> Palanca de tercer grado.</li>
+    <li><strong>Cabeza (al asentir):</strong> Palanca de primer grado.</li>
+    <li><strong>Mandíbula (al masticar):</strong> Palanca de tercer grado.</li>
+</ul>
+</div>
+
+<!-- ============================================================ -->
+<!-- PARTE 3: ENGRANAJES -->
+<!-- ============================================================ -->
+<div class="seccion" id="seccion3">
+<h2>⚙️ PARTE 3: ENGRANAJES</h2>
+
+<h3>3.1 ¿Qué es un engranaje?</h3>
+<p>Un <strong>engranaje</strong> es un mecanismo formado por <strong>ruedas dentadas</strong> que transmiten movimiento circular entre ejes mediante el empuje de sus dientes. Los dientes de un engranaje encajan con los dientes de otro, asegurando una transmisión precisa sin deslizamiento.</p>
+
+<p>Son fundamentales en casi todas las máquinas modernas: relojes, bicicletas, automóviles, electrodomésticos, maquinaria industrial.</p>
+
+<h3>3.2 Elementos de un engranaje</h3>
+<ul>
+    <li><strong>Dientes:</strong> Salientes que transmiten la fuerza por contacto.</li>
+    <li><strong>Circunferencia primitiva (D):</strong> Círculo teórico sobre el que se calcula el engranaje.</li>
+    <li><strong>Módulo (m):</strong> m = D / Z (relación entre diámetro y número de dientes).</li>
+    <li><strong>Número de dientes (Z):</strong> Cantidad de dientes del engranaje.</li>
+</ul>
+
+<h3>3.3 Tipos de engranajes</h3>
+
+<h4>A) Engranajes rectos</h4>
+<p>Dientes rectos y paralelos al eje. Transmiten movimiento entre <strong>ejes paralelos</strong>.</p>
+<ul>
+    <li>Son los más comunes, económicos y fáciles de fabricar.</li>
+    <li>Generan ruido a altas velocidades.</li>
+    <li><strong>Uso:</strong> Lavadoras, taladros, juguetes, relojes.</li>
+</ul>
+
+<h4>B) Engranajes helicoidales</h4>
+<p>Dientes inclinados en forma de hélice. Son más <strong>silenciosos y resistentes</strong> que los rectos.</p>
+<ul>
+    <li>Soportan mayores cargas y velocidades.</li>
+    <li><strong>Uso:</strong> Cajas de cambios de automóviles, maquinaria industrial.</li>
+</ul>
+
+<h4>C) Engranajes cónicos</h4>
+<p>Forma de cono truncado. Transmiten movimiento entre ejes que se <strong>cortan</strong> (generalmente a 90°).</p>
+<ul>
+    <li><strong>Uso:</strong> Diferencial de automóviles, taladros manuales.</li>
+</ul>
+
+<h4>D) Tornillo sin fin y corona</h4>
+<p>Un <strong>tornillo</strong> (conductor) engrana con una <strong>rueda dentada</strong> (conducida).</p>
+<ul>
+    <li>Grandes reducciones de velocidad.</li>
+    <li><strong>No es reversible:</strong> el tornillo mueve la corona, pero la corona no puede mover el tornillo.</li>
+    <li><strong>Uso:</strong> Puertas de garaje, clavijas de guitarra, limpiaparabrisas.</li>
+</ul>
+
+<h4>E) Piñón y cremallera</h4>
+<p>Convierte el <strong>movimiento circular en lineal</strong> (y viceversa).</p>
+<ul>
+    <li><strong>Uso:</strong> Dirección de automóviles, puertas automáticas, taladros de columna.</li>
+</ul>
+
+<table>
+    <tr><th>Tipo</th><th>Posición de ejes</th><th>Característica</th></tr>
+    <tr><td>Rectos</td><td>Paralelos</td><td>Económicos, ruidosos</td></tr>
+    <tr><td>Helicoidales</td><td>Paralelos o cruzados</td><td>Silenciosos, alta capacidad</td></tr>
+    <tr><td>Cónicos</td><td>Se cortan (90°)</td><td>Cambian dirección del giro</td></tr>
+    <tr><td>Tornillo sin fin - Corona</td><td>Se cruzan (90°)</td><td>Gran reducción, no reversible</td></tr>
+    <tr><td>Piñón - Cremallera</td><td>—</td><td>Convierte circular en lineal</td></tr>
+</table>
+
+<h3>3.4 Relación de transmisión (RT)</h3>
+<div class="formula-box">
+    <strong>Fórmula fundamental:</strong> N₁ × Z₁ = N₂ × Z₂<br>
+    N₁ = velocidad del engranaje motriz (rpm)<br>
+    Z₁ = dientes del engranaje motriz<br>
+    N₂ = velocidad del engranaje conducido (rpm)<br>
+    Z₂ = dientes del engranaje conducido<br><br>
+    <strong>RT = Z₁ / Z₂ = N₂ / N₁</strong>
+</div>
+
+<p><strong>Interpretación:</strong></p>
+<ul>
+    <li>Si <strong>RT &lt; 1</strong> → <strong>Reductor de velocidad</strong>: menos velocidad, más fuerza (ej: subir una cuesta en bicicleta con cambio bajo).</li>
+    <li>Si <strong>RT = 1</strong> → Transmisión directa (igual velocidad).</li>
+    <li>Si <strong>RT &gt; 1</strong> → <strong>Multiplicador de velocidad</strong>: más velocidad, menos fuerza (ej: bicicleta en plano con cambio alto).</li>
+</ul>
+
+<div class="ejemplo">
+    <strong>🔹 Ejemplo cotidiano: la bicicleta.</strong> El plato (engranaje motriz en los pedales) tiene 44 dientes y el piñón trasero tiene 11 dientes. RT = 44/11 = 4. Por cada vuelta de pedal, la rueda trasera da 4 vueltas. ¡Así se multiplica la velocidad!
+</div>
+
+<h3>3.5 Sentido de giro</h3>
+<ul>
+    <li><strong>Dos engranajes directos:</strong> giran en <strong>sentido contrario</strong>.</li>
+    <li><strong>Con un engranaje loco (intermedio):</strong> giran en el <strong>mismo sentido</strong>.</li>
+    <li><strong>Con cadena o correa:</strong> giran en el <strong>mismo sentido</strong>.</li>
+</ul>
+
+<h3>3.6 Trenes de engranajes</h3>
+<p>Combinación de varios pares de engranajes para obtener grandes reducciones o aumentos de velocidad.</p>
+<div class="formula-box">
+    <strong>RT total = RT₁ × RT₂ × RT₃ × ...</strong>
+</div>
+
+<div class="ejemplo">
+    <strong>🔹 Ejemplo cotidiano:</strong> Un reloj mecánico tiene varios trenes de engranajes para que la manecilla de los minutos gire 60 veces más rápido que la de las horas. Las cajas de cambios de los automóviles usan trenes de engranajes para ofrecer diferentes velocidades.
+</div>
+
+<div class="info-box">
+    <strong>💡 Sabías que...</strong> Los engranajes se usaban desde la antigua Grecia. El mecanismo de Anticitera (año 100 a.C.) es una computadora astronómica con engranajes de bronce, ¡considerada la primera computadora analógica de la historia!
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PARTE 4: TALLER PRÁCTICO -->
+<!-- ============================================================ -->
+<div class="seccion" id="seccion4">
+<h2>✏️ PARTE 4: TALLER PRÁCTICO</h2>
+<p><strong>Nombre del estudiante:</strong> <span id="tallerNombre">______________</span> &nbsp;&nbsp; <strong>Curso:</strong> <span id="tallerCurso">______________</span></p>
+<p><em>Resuelve cada ejercicio en tu cuaderno. Dibuja un esquema para cada problema antes de hacer cálculos. Usa g = 9.8 m/s² cuando sea necesario.</em></p>
+
+<hr style="margin:20px 0;">
+
+<h3>📍 Tema 1: Poleas</h3>
+
+<div class="ejercicio">
+    <p><span class="num">1.</span> Un albañil usa una polea fija para subir un balde de cemento de 25 kg. ¿Qué fuerza debe aplicar? ¿Cuál es la ventaja mecánica? ¿Qué ventaja obtiene al usar la polea?</p>
+</div>
+
+<div class="ejercicio">
+    <p><span class="num">2.</span> Con una polea móvil queremos elevar un bulto de café de 80 kg.</p>
+    <p>a) Calcula la fuerza teórica necesaria.<br>b) ¿Cuántos metros de cuerda debemos recoger para subir el bulto 1.5 metros?</p>
+</div>
+
+<div class="ejercicio">
+    <p><span class="num">3.</span> Un polipasto potencial tiene 3 poleas fijas y 3 poleas móviles. Se quiere levantar un motor de 240 kg.</p>
+    <p>a) ¿Qué fuerza hay que aplicar?<br>b) ¿Cuál es la ventaja mecánica del sistema?</p>
+</div>
+
+<div class="ejercicio">
+    <p><span class="num">4.</span> Una polea motriz de 40 cm de diámetro gira a 600 rpm y está conectada por una correa a una polea conducida de 20 cm de diámetro.</p>
+    <p>a) Calcula la velocidad de la polea conducida.<br>b) ¿Es un sistema multiplicador o reductor?<br>c) Calcula la relación de transmisión.</p>
+</div>
+
+<div class="ejercicio">
+    <p><span class="num">5.</span> Un operario puede ejercer una fuerza máxima de 60 kg-f. Necesita levantar un bloque de concreto de 360 kg. Diseña un polipasto que permita hacerlo:</p>
+    <p>a) ¿Cuántas poleas móviles son necesarias como mínimo (polipasto potencial)?<br>b) ¿Cuántas poleas fijas se requieren?</p>
+</div>
+
+<h3>📍 Tema 2: Palancas</h3>
+
+<div class="ejercicio">
+    <p><span class="num">6.</span> Identifica el tipo de palanca (1er, 2do o 3er grado) para cada objeto:</p>
+    <p>a) Tijeras &nbsp; b) Carretilla &nbsp; c) Caña de pescar &nbsp; d) Cascanueces<br>e) Balancín &nbsp; f) Escoba &nbsp; g) Abridor de botellas &nbsp; h) Pinzas de depilar</p>
+</div>
+
+<div class="ejercicio">
+    <p><span class="num">7.</span> Calcula la fuerza que debemos aplicar para mover una roca de 150 kg con una palanca de primer grado. El brazo de resistencia mide 30 cm y el brazo de potencia mide 120 cm.</p>
+</div>
+
+<div class="ejercicio">
+    <p><span class="num">8.</span> Queremos levantar una piedra de 250 kg usando una barra de 3 m como palanca de primer grado. Colocamos el fulcro a 60 cm de la piedra.</p>
+    <p>a) ¿Qué fuerza debemos aplicar?<br>b) ¿Cuánto mide el brazo de potencia?</p>
+</div>
+
+<div class="ejercicio">
+    <p><span class="num">9.</span> En una carretilla llevamos 2 bultos de cemento de 50 kg cada uno. La distancia de la carga al punto de apoyo (rueda) es de 40 cm y los brazos miden 120 cm desde el punto de apoyo.</p>
+    <p>a) ¿De qué tipo de palanca se trata?<br>b) ¿Qué fuerza debemos ejercer?</p>
+</div>
+
+<div class="ejercicio">
+    <p><span class="num">10.</span> Un abridor de botellas tiene el punto de apoyo a 1.5 cm del borde de la tapa. La mano aplica fuerza a 15 cm del punto de apoyo. Si la tapa opone una resistencia de 25 kg:</p>
+    <p>a) ¿Qué fuerza debemos hacer?<br>b) ¿Por qué es más fácil que destapar sin abridor?</p>
+</div>
+
+<div class="ejercicio">
+    <p><span class="num">11.</span> Una caña de pescar mide 3.5 m de longitud total. El fulcro está en el extremo del mango. La mano sujeta la caña a 50 cm del extremo. En el otro extremo hay un pez de 1.5 kg.</p>
+    <p>a) Calcula la fuerza que deben hacer los músculos del brazo.<br>b) ¿Por qué se usa una palanca de tercer grado si requiere más fuerza?</p>
+</div>
+
+<div class="ejercicio">
+    <p><span class="num">12.</span> En una grúa, la pluma mide 12 m y el contrapeso está a 4 m del apoyo. Si la carga máxima es de 400 kg, ¿qué masa debe tener el contrapeso?</p>
+</div>
+
+<h3>📍 Tema 3: Engranajes</h3>
+
+<div class="ejercicio">
+    <p><span class="num">13.</span> Un piñón motriz de 20 dientes gira a 1200 rpm acoplado a una rueda de 60 dientes.</p>
+    <p>a) Calcula la velocidad de la rueda conducida.<br>b) Calcula la relación de transmisión.<br>c) ¿Es reductor o multiplicador?</p>
+</div>
+
+<div class="ejercicio">
+    <p><span class="num">14.</span> Tres engranajes en cadena: A (motriz, 15 dientes, gira horario), B (intermedio, 30 dientes), C (conducido, 45 dientes).</p>
+    <p>a) ¿En qué sentido giran B y C?<br>b) Calcula la velocidad de C si A gira a 900 rpm.<br>c) ¿Cuál es la RT total?</p>
+</div>
+
+<div class="ejercicio">
+    <p><span class="num">15.</span> En una bicicleta, el plato (motriz) tiene 48 dientes y gira a 60 rpm. El piñón trasero tiene 16 dientes.</p>
+    <p>a) ¿A qué velocidad gira la rueda trasera?<br>b) ¿Cuántos dientes debería tener el piñón para que la rueda gire al doble de velocidad?</p>
+</div>
+
+<div class="ejercicio">
+    <p><span class="num">16.</span> Un engranaje recto tiene 50 dientes y módulo 4 mm.</p>
+    <p>a) Calcula el diámetro primitivo (D = m × Z).<br>b) Calcula el diámetro exterior (De = D + 2m).<br>c) Calcula el paso circular (p = π × m).</p>
+</div>
+
+<div class="ejercicio">
+    <p><span class="num">17.</span> Un tren de engranajes tiene 3 etapas:</p>
+    <p>Etapa 1: Z₁ = 12, Z₂ = 48 &nbsp;|&nbsp; Etapa 2: Z₃ = 15, Z₄ = 60 &nbsp;|&nbsp; Etapa 3: Z₅ = 20, Z₆ = 80</p>
+    <p>a) Calcula la RT de cada etapa.<br>b) Calcula la RT total.<br>c) Si el motor de entrada gira a 1800 rpm, ¿cuál es la velocidad de salida?</p>
+</div>
+
+<h3>📍 Problemas integradores</h3>
+
+<div class="ejercicio">
+    <p><span class="num">18.</span> Una grúa tiene un polipasto potencial de 3 poleas móviles para levantar la carga (1500 kg). El torno tiene tambor de 12 cm de radio y manivela de 60 cm.</p>
+    <p>a) ¿Qué fuerza se ejerce en la cuerda del polipasto?<br>b) ¿Qué fuerza debe aplicarse en la manivela? <em>(Ayuda: para el torno usa P × m = R × r)</em></p>
+</div>
+
+<div class="ejercicio">
+    <p><span class="num">19.</span> Una bicicleta tiene plato de 44 dientes, piñón de 11 dientes, bielas de 17 cm y rueda trasera de radio 35 cm.</p>
+    <p>a) ¿Qué tipo de palanca son los pedales?<br>b) ¿Cuál es la RT del sistema de engranajes?<br>c) Por cada vuelta de pedal, ¿cuántas vueltas da la rueda?</p>
+</div>
+
+<div class="ejercicio">
+    <p><span class="num">20.</span> Un ascensor usa un polipasto potencial de 2 poleas fijas y 2 móviles. La cabina pesa 350 kg y transporta hasta 450 kg.</p>
+    <p>a) Calcula la fuerza mínima del motor con carga máxima.<br>b) ¿Qué ventaja mecánica tiene el sistema?</p>
+</div>
+
+</div>
+
+<!-- ============================================================ -->
+<!-- PARTE 5: EVALUACION TIPO ICFES -->
+<!-- ============================================================ -->
+<div class="seccion" id="seccion5">
+<h2>📝 PARTE 5: EVALUACIÓN TIPO ICFES</h2>
+<p><strong>20 preguntas de selección múltiple con única respuesta.</strong> Marca la opción correcta en cada pregunta. Al final, presiona "Calificar" para ver tu resultado.</p>
+<p style="font-size:0.9em; color:#666;"><span id="contador">0</span> de 20 preguntas respondidas</p>
+
+<div id="preguntasContainer"></div>
+
+<div class="resultado" id="resultadoFinal">
+    <h2>📊 RESULTADO</h2>
+    <div class="nota" id="notaFinal">0.0</div>
+    <p id="detalleFinal"></p>
+    <p id="mensajeFinal" style="font-size:1.2em; margin-top:10px;"></p>
+</div>
+
+<div class="no-print" style="text-align:center;">
+    <button class="btn btn-success" onclick="calificarEvaluacion()">✅ Calificar evaluación</button>
+    <button class="btn btn-warning" onclick="mostrarRespuestas()">👁️ Mostrar respuestas correctas</button>
+    <button class="btn btn-danger" onclick="reiniciarEvaluacion()">🔄 Reiniciar evaluación</button>
+</div>
+</div>
+
+<!-- ========== FOOTER ========== -->
+<div style="text-align:center; padding:20px; color:#666; font-size:0.9em;">
+    <p>Material educativo para grado 7° - Educación Básica Secundaria - Colombia</p>
+    <p>Máquinas simples y compuestas: poleas, palancas y engranajes</p>
+</div>
+
+</div><!-- /container -->
+
+<script>
+// ========== PREGUNTAS DE LA EVALUACION ==========
+const preguntasBanco = [
+    { q: "¿Qué tipo de polea permite reducir la fuerza necesaria a la mitad para levantar una carga?", opts: ["Polea fija", "Polea móvil", "Polipasto exponencial", "Polea con correa"], ans: 1 },
+    { q: "En una palanca de segundo grado, ¿dónde se encuentra la resistencia?", opts: ["Entre la potencia y el fulcro", "En el extremo opuesto al fulcro", "Entre el fulcro y la potencia", "En el mismo punto que la potencia"], ans: 2 },
+    { q: "¿Cuál es la fórmula correcta de la ley de la palanca?", opts: ["F × R = Bp × Br", "P × Bp = R × Br", "P × R = Bp × Br", "P + Bp = R + Br"], ans: 1 },
+    { q: "¿Cuál de los siguientes es un ejemplo de palanca de tercer grado?", opts: ["Carretilla", "Tijeras", "Caña de pescar", "Cascanueces"], ans: 2 },
+    { q: "Un piñón motriz de 20 dientes gira a 600 rpm y la rueda conducida tiene 40 dientes. ¿A qué velocidad gira la rueda?", opts: ["1200 rpm", "600 rpm", "300 rpm", "150 rpm"], ans: 2 },
+    { q: "¿Qué ventaja principal ofrece una polea fija?", opts: ["Reduce la fuerza a la mitad", "Cambia la dirección de la fuerza", "Multiplica la fuerza por 4", "Elimina la resistencia"], ans: 1 },
+    { q: "Las tijeras son un ejemplo de palanca de:", opts: ["Primer grado", "Segundo grado", "Tercer grado", "No son una palanca"], ans: 0 },
+    { q: "¿Qué es un polipasto?", opts: ["Una polea fija", "Combinación de poleas fijas y móviles", "Un tipo de engranaje", "Una palanca especial"], ans: 1 },
+    { q: "La relación de transmisión en engranajes se calcula como:", opts: ["Z₁ × Z₂", "Z₁ / Z₂", "Z₁ + Z₂", "Z₂ - Z₁"], ans: 1 },
+    { q: "¿Qué tipo de engranaje se usa para ejes que se cruzan a 90°?", opts: ["Recto", "Helicoidal", "Cónico", "Cremallera"], ans: 2 },
+    { q: "En una polea móvil, ¿cuántos segmentos de cuerda soportan la carga?", opts: ["1", "2", "3", "4"], ans: 1 },
+    { q: "¿Cuál funciona como palanca de primer grado?", opts: ["Carretilla", "Alicates", "Escoba", "Pinzas de depilar"], ans: 1 },
+    { q: "Polipasto potencial con 3 poleas móviles: la fuerza es:", opts: ["F = R/3", "F = R/6", "F = R/8", "F = R/2"], ans: 1 },
+    { q: "¿Qué mecanismo convierte movimiento circular en lineal?", opts: ["Polea fija", "Engranaje recto", "Piñón y cremallera", "Polea móvil"], ans: 2 },
+    { q: "En palanca de segundo grado la potencia siempre es:", opts: ["Mayor que la resistencia", "Menor que la resistencia", "Igual", "Depende del brazo"], ans: 1 },
+    { q: "¿Qué ocurre al añadir un engranaje loco entre dos?", opts: ["Invierte el sentido", "Mismo sentido", "Detiene el movimiento", "Duplica la velocidad"], ans: 1 },
+    { q: "¿Cuál es la ventaja mecánica de una polea fija?", opts: ["VM = 0", "VM = 1", "VM = 2", "VM = 4"], ans: 1 },
+    { q: "¿Qué engranaje es más silencioso que el recto?", opts: ["Cónico recto", "Helicoidal", "Cremallera", "Todos son iguales"], ans: 1 },
+    { q: "Carga de 100 kg, palanca 1er grado, Br=20 cm, Bp=80 cm. ¿Qué fuerza se requiere?", opts: ["50 kg", "25 kg", "100 kg", "400 kg"], ans: 1 },
+    { q: "¿Cuál NO es una máquina simple?", opts: ["Polea", "Palanca", "Motor eléctrico", "Plano inclinado"], ans: 2 },
+    { q: "Si Z₁=10 y Z₂=30, la RT es:", opts: ["3", "1/3", "20", "40"], ans: 1 },
+    { q: "¿Qué tipo de palanca es una carretilla?", opts: ["Primer grado", "Segundo grado", "Tercer grado", "No es palanca"], ans: 1 },
+    { q: "Para subir una carga 2 m con polea móvil, ¿cuánta cuerda se necesita?", opts: ["1 m", "2 m", "3 m", "4 m"], ans: 3 },
+    { q: "¿Los engranajes helicoidales son más ___ que los rectos?", opts: ["Ruidosos", "Silenciosos", "Frágiles", " lentos"], ans: 1 },
+    { q: "¿Qué elemento NO es parte de una palanca?", opts: ["Fulcro", "Potencia", "Resistencia", "Polea"], ans: 3 },
+    { q: "Un engranaje loco (intermedio) hace que el conducido gire:", opts: ["En sentido contrario", "En el mismo sentido", "Más rápido", "Más lento"], ans: 1 },
+    { q: "¿Cuál de estas herramientas es una palanca de segundo grado?", opts: ["Tijeras", "Alicates", "Cascanueces", "Caña de pescar"], ans: 2 },
+    { q: "Fórmula del polipasto potencial:", opts: ["F = R × 2n", "F = R / (2n)", "F = R × n", "F = R - 2n"], ans: 1 },
+    { q: "Para que una palanca de primer grado multiplique fuerza, Bp debe ser:", opts: ["Menor que Br", "Igual a Br", "Mayor que Br", "Cero"], ans: 2 },
+    { q: "¿Qué tipo de engranaje se usa en el diferencial de un auto?", opts: ["Recto", "Helicoidal", "Cónico", "Cremallera"], ans: 2 },
+    { q: "¿Cuántas poleas fijas tiene un polipasto de 2F + 2M?", opts: ["1", "2", "3", "4"], ans: 1 },
+    { q: "La relación de transmisión RT = N₂/N₁, si N₂ > N₁ el sistema es:", opts: ["Reductor", "Multiplicador", "Directo", "No funciona"], ans: 1 },
+    { q: "¿Cuál es la VM de un polipasto 2F + 2M?", opts: ["2", "3", "4", "6"], ans: 2 },
+    { q: "¿Qué máquina simple es un tornillo?", opts: ["Palanca", "Plano inclinado enrollado", "Polea", "Rueda"], ans: 1 },
+    { q: "En una polea fija, la fuerza aplicada es:", opts: ["La mitad de la resistencia", "Igual a la resistencia", "El doble", "El triple"], ans: 1 },
+    { q: "¿Qué tipo de engranaje tiene dientes inclinados?", opts: ["Recto", "Helicoidal", "Cónico recto", "Cremallera"], ans: 1 },
+    { q: "La escoba al barrer es una palanca de:", opts: ["Primer grado", "Segundo grado", "Tercer grado", "No es palanca"], ans: 2 },
+    { q: "¿Qué sistema usa cadena para transmitir movimiento?", opts: ["Polea fija", "Bicicleta", "Polipasto", "Palanca"], ans: 1 },
+    { q: "Si un polipasto exponencial tiene 3 poleas móviles, la fuerza es:", opts: ["R/3", "R/6", "R/8", "R/9"], ans: 2 },
+];
+
+// Seleccionar 20 preguntas aleatorias
+let preguntas = [];
+let respuestas = [];
+
+function shuffleArray(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+}
+
+function iniciarEvaluacion() {
+    const shuffled = shuffleArray([...preguntasBanco]);
+    preguntas = shuffled.slice(0, 20);
+    respuestas = new Array(20).fill(null);
+    renderPreguntas();
+}
+
+function renderPreguntas() {
+    const container = document.getElementById('preguntasContainer');
+    container.innerHTML = '';
+    const letters = ['A', 'B', 'C', 'D'];
+    
+    preguntas.forEach((p, idx) => {
+        const div = document.createElement('div');
+        div.className = 'pregunta';
+        div.id = `preg-${idx}`;
+        
+        let optsHtml = '<div class="opts">';
+        p.opts.forEach((opt, oi) => {
+            optsHtml += `<div><input type="radio" name="eval-${idx}" value="${oi}" id="e${idx}-${oi}" onchange="marcarRespuesta(${idx}, ${oi})">
+            <label for="e${idx}-${oi}"><strong>${letters[oi]}.</strong> ${opt}</label></div>`;
+        });
+        optsHtml += '</div>';
+        
+        div.innerHTML = `
+            <div class="qtext">${idx + 1}. ${p.q}</div>
+            ${optsHtml}
+            <div class="respuesta" id="res-${idx}">
+                <strong>Respuesta correcta:</strong> ${letters[p.ans]}. ${p.opts[p.ans]}
+            </div>
+        `;
+        container.appendChild(div);
+    });
+    actualizarContador();
+}
+
+function marcarRespuesta(idx, val) {
+    respuestas[idx] = val;
+    actualizarContador();
+}
+
+function actualizarContador() {
+    const count = respuestas.filter(r => r !== null).length;
+    document.getElementById('contador').textContent = count;
+}
+
+function calificarEvaluacion() {
+    let correctas = 0;
+    
+    preguntas.forEach((p, idx) => {
+        const card = document.getElementById(`preg-${idx}`);
+        const radios = card.querySelectorAll('input[type="radio"]');
+        const resDiv = document.getElementById(`res-${idx}`);
+        
+        radios.forEach((radio, oi) => {
+            const label = radio.nextElementSibling;
+            label.style.fontWeight = 'normal';
+            label.style.color = '';
+            if (oi === p.ans) {
+                label.style.color = '#28a745';
+                label.style.fontWeight = 'bold';
+            }
+            if (respuestas[idx] !== null && respuestas[idx] !== p.ans && oi === respuestas[idx]) {
+                label.style.color = '#dc3545';
+                label.style.fontWeight = 'bold';
+            }
+        });
+        
+        if (respuestas[idx] === p.ans) correctas++;
+    });
+    
+    const nota = (correctas / preguntas.length) * 5;
+    const notaMostrar = nota.toFixed(1);
+    
+    document.getElementById('notaFinal').textContent = notaMostrar;
+    document.getElementById('notaFinal').className = 'nota ' + (nota >= 3.0 ? 'aprobado' : 'reprobado');
+    
+    let mensaje = '';
+    if (nota >= 4.5) mensaje = '🌟 ¡Excelente! Dominas muy bien los mecanismos.';
+    else if (nota >= 3.0) mensaje = '👍 Bien, pero puedes repasar algunos conceptos.';
+    else mensaje = '📚 Necesitas repasar. Revisa la guía de estudio e intenta de nuevo.';
+    
+    document.getElementById('detalleFinal').innerHTML = `
+        ✅ Correctas: ${correctas} de ${preguntas.length} &nbsp;|&nbsp; ❌ Incorrectas: ${preguntas.length - correctas}
+    `;
+    document.getElementById('mensajeFinal').textContent = mensaje;
+    document.getElementById('resultadoFinal').classList.add('mostrar');
+    
+    // Mostrar todas las respuestas
+    preguntas.forEach((p, idx) => {
+        const resDiv = document.getElementById(`res-${idx}`);
+        resDiv.style.display = 'block';
+        const icono = respuestas[idx] === p.ans ? '✅' : '❌';
+        resDiv.innerHTML = `${icono} <strong>Respuesta correcta:</strong> ${['A','B','C','D'][p.ans]}. ${p.opts[p.ans]}`;
+        if (respuestas[idx] !== null && respuestas[idx] !== p.ans) {
+            resDiv.style.background = '#f8d7da';
+            resDiv.style.color = '#721c24';
+        } else if (respuestas[idx] === p.ans) {
+            resDiv.style.background = '#d4edda';
+            resDiv.style.color = '#155724';
+        }
+    });
+    
+    document.querySelector('.resultado').scrollIntoView({ behavior: 'smooth' });
+}
+
+function mostrarRespuestas() {
+    preguntas.forEach((p, idx) => {
+        const resDiv = document.getElementById(`res-${idx}`);
+        resDiv.style.display = 'block';
+        resDiv.innerHTML = `📖 <strong>Respuesta correcta:</strong> ${['A','B','C','D'][p.ans]}. ${p.opts[p.ans]}`;
+        resDiv.style.background = '#fff3cd';
+        resDiv.style.color = '#856404';
+        
+        const radios = document.querySelectorAll(`#preg-${idx} input[type="radio"]`);
+        radios.forEach((radio, oi) => {
+            const label = radio.nextElementSibling;
+            if (oi === p.ans) {
+                label.style.color = '#28a745';
+                label.style.fontWeight = 'bold';
+            }
+        });
+    });
+}
+
+function reiniciarEvaluacion() {
+    iniciarEvaluacion();
+    document.getElementById('resultadoFinal').classList.remove('mostrar');
+    window.scrollTo({ top: document.getElementById('seccion5').offsetTop - 20, behavior: 'smooth' });
+}
+
+// ========== INICIALIZAR ==========
+document.addEventListener('DOMContentLoaded', function() {
+    iniciarEvaluacion();
+    
+    // Copiar nombre y curso a la seccion del taller
+    const nombreInput = document.getElementById('nombreEst');
+    const cursoInput = document.getElementById('cursoEst');
+    if (nombreInput && cursoInput) {
+        nombreInput.addEventListener('input', function() {
+            document.getElementById('tallerNombre').textContent = this.value || '______________';
+        });
+        cursoInput.addEventListener('input', function() {
+            document.getElementById('tallerCurso').textContent = this.value || '______________';
+        });
+    }
+});
+</script>
+
+</body>
+</html>
