@@ -711,7 +711,6 @@ li { margin:3px 0; }
 </div>
 <div class="no-print" style="text-align:center;margin-top:15px;">
     <button class="btn btn-success" onclick="calificarEval()">✅ Calificar</button>
-    <button class="btn btn-warning" onclick="mostrarRespEval()">👁️ Ver respuestas</button>
     <button class="btn btn-danger" onclick="reiniciarEval()">🔄 Reiniciar</button>
 </div>
 </div>
@@ -805,14 +804,7 @@ function calificarEval(){
     e.textContent=n.toFixed(1);e.className='nota '+(n>=3.0?'aprobado':'reprobado');
     document.getElementById('detalleEval').innerHTML=`✅ ${c}/${preguntas.length} correctas | ❌ ${preguntas.length-c} incorrectas`;
     document.getElementById('mensajeEval').textContent=n>=4.5?'🌟 Excelente!':n>=3.0?'👍 Bien, repasa lo malo.':'📚 Repasa la guía e intenta de nuevo.';
-    document.getElementById('resultadoEval').classList.add('mostrar');
-}
-function mostrarRespEval(){
-    const l=['A','B','C','D'];
-    preguntas.forEach((p,i)=>{
-        const rd=document.getElementById('re-'+i);rd.style.display='block';rd.innerHTML=`📖 <b>Correcta:</b> ${l[p.ans]}. ${p.opts[p.ans]}`;rd.style.background='#fff3cd';rd.style.color='#856404';
-        document.querySelectorAll(`#pe-${i} input`).forEach((r,oi)=>{if(oi===p.ans){r.nextElementSibling.style.color='#28a745';r.nextElementSibling.style.fontWeight='bold';}});
-    });
+document.getElementById('resultadoEval').classList.add('mostrar');
 }
 function reiniciarEval(){initEval();}
 </script>
