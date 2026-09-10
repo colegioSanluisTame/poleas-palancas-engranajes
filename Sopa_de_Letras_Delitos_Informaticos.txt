@@ -1,0 +1,31 @@
+SOPA DE LETRAS: DELITOS INFORMATICOS
+
+Encuentra las siguientes palabras relacionadas con los delitos informáticos. Las palabras pueden estar ocultas horizontalmente, verticalmente, diagonalmente o hacia atrás.
+
+PALABRAS PARA BUSCAR:
+1. PHISHING
+2. RANSOMWARE
+3. MALWARE
+4. HACKING
+5. CIBERACOSO
+6. CONTRASEÑA
+7. VIRUS
+8. PRIVACIDAD
+9. RED
+10. FIREWALL
+11. ENGENIERIA_SOCIAL
+12. DATOS_PERSONALES
+13. BLOQUEAR
+14. ANTIVIRUS
+15. ACTUALIZACION
+16. COMPUTADOR
+17. INTERNET
+18. SEGURIDAD
+19. ENGAÑO
+20. DENUNCIA
+
+--- INSTRUCCIONES ---
+Busca y resalta cada palabra. Cuando hayas encontrado todas, responde las preguntas de la evaluación al final.
+
+--- SOLUCION (para el maestro) ---
+Todas las palabras están ocultas en la sopa de letras anterior.

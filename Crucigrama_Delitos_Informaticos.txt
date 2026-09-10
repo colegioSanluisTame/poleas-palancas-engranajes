@@ -1,0 +1,53 @@
+CRUCIGRAMA: DELITOS INFORMATICOS
+
+Datos para cruzar (todas las respuestas están en la Guía de Estudio):
+
+ACROSS (HORIZONTAL):
+1. Delito que consiste en acceder a un sistema sin autorización (11 letras)
+2. Software diseñado para dañar sistemas (7 letras)
+3. Engañar a personas para obtener datos (9 letras)
+4. Bloquear archivos y exigir pago (10 letras)
+5. Acoso a través de medios digitales (11 letras)
+6. Herramienta que protege contra accesos no autorizados (8 letras)
+7. Robo de identidad digital (16 letras)
+8. Fallecer o dañar información (9 letras)
+9. Sistema que usa para navegar (6 letras)
+10. Información que debe protegerse (12 letras)
+
+DOWN (VERTICAL):
+1. Clave de acceso a cuentas (9 letras)
+2. Delito de obtener datos sin autorización (16 letras)
+3. Actualización de seguridad (13 letras)
+4. Software dañino general (7 letras)
+5. Espacio de redes conectadas (3 letras)
+6. Medida de protección de datos (14 letras)
+7. Delito de Dañar sistemas (11 letras)
+8. Verificar direcciones web (9 letras)
+9. Copiar información ajenas (11 letras)
+10. Pago ilícito por liberación (9 letras)
+
+--- SOLUCION (para el maestro) ---
+1. Hacking
+2. Malware
+3. Phishing
+4. Ransomware
+5. Ciberacoso
+6. Firewall
+7. Suplantacion_identidad
+8. Daño_informatico
+9. Internet
+10. Datos_personales
+
+1. Contraseña
+2. Violacion_datos
+3. Actualizacion
+4. Virus
+5. Red
+6. Ciberseguridad
+7. Acceso_abusivo
+8. Verificar_url
+9. Hurto_informatico
+10. Rescate
+
+--- INSTRUCCIONES ---
+Completa el crucigrama usando las definiciones como pistas. Las palabras se intersectan entre sí.

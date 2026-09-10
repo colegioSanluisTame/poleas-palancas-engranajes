@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación: Poleas, Palancas y Engranajes - Grado 7°</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .header {
+            background: linear-gradient(135deg, #e94560, #c23152);
+            color: white;
+            padding: 30px;
+            border-radius: 15px 15px 0 0;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(233, 69, 96, 0.3);
+        }
+        .header h1 { font-size: 1.8em; margin-bottom: 5px; }
+        .header p { font-size: 0.95em; opacity: 0.9; }
+        .header .student-info {
+            margin-top: 15px;
+            display: flex; gap: 10px; flex-wrap: wrap;
+        }
+        .header .student-info input {
+            flex: 1; padding: 10px 15px; border: none; border-radius: 8px;
+            font-size: 0.95em; min-width: 200px;
+        }
+        .header .student-info input:focus { outline: 2px solid #ffd700; }
+        .quiz-body {
+            background: white;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .question-card {
+            background: #f8f9fa;
+            border-left: 4px solid #0f3460;
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 0 10px 10px 0;
+            transition: all 0.3s;
+        }
+        .question-card:hover { background: #f0f2f5; }
+        .question-card.correct { border-left-color: #28a745; background: #e8f5e9; }
+        .question-card.incorrect { border-left-color: #dc3545; background: #fbe9e7; }
+        .question-number {
+            font-weight: 700; color: #0f3460; font-size: 0.9em;
+        }
+        .question-text {
+            font-size: 1.05em; margin: 8px 0 12px 0; line-height: 1.5;
+        }
+        .options { display: flex; flex-direction: column; gap: 8px; }
+        .options label {
+            display: flex; align-items: center; gap: 12px;
+            padding: 10px 15px; background: white; border: 2px solid #dee2e6;
+            border-radius: 8px; cursor: pointer; transition: all 0.2s;
+        }
+        .options label:hover { border-color: #0f3460; background: #eef2f7; }
+        .options input[type="radio"] { accent-color: #0f3460; width: 18px; height: 18px; }
+        .options label.selected { border-color: #0f3460; background: #dbeafe; }
+        .options label.correct-answer { border-color: #28a745; background: #c8e6c9; font-weight: 600; }
+        .options label.wrong-answer { border-color: #dc3545; background: #ffcdd2; }
+        .feedback {
+            margin-top: 10px; padding: 10px; border-radius: 6px;
+            font-size: 0.9em; display: none;
+        }
+        .feedback.show { display: block; }
+        .feedback.correct { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .feedback.incorrect { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .actions {
+            display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;
+            padding: 20px 0;
+        }
+        .actions button, .actions a {
+            padding: 14px 35px; border: none; border-radius: 10px;
+            font-size: 1.05em; font-weight: 600; cursor: pointer;
+            transition: all 0.3s; text-decoration: none; display: inline-block;
+        }
+        .btn-primary { background: #0f3460; color: white; }
+        .btn-primary:hover { background: #1a5276; transform: translateY(-2px); }
+        .btn-success { background: #28a745; color: white; }
+        .btn-success:hover { background: #218838; transform: translateY(-2px); }
+        .btn-secondary { background: #6c757d; color: white; }
+        .btn-secondary:hover { background: #5a6268; transform: translateY(-2px); }
+        .btn-primary:disabled, .btn-success:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+        .result-box {
+            background: linear-gradient(135deg, #0f3460, #1a5276);
+            color: white; padding: 30px; border-radius: 10px;
+            text-align: center; margin: 20px 0; display: none;
+        }
+        .result-box.show { display: block; }
+        .result-box h2 { font-size: 1.8em; }
+        .result-box .grade { font-size: 3.5em; font-weight: 800; margin: 10px 0; }
+        .result-box .grade.pass { color: #ffd700; }
+        .result-box .grade.fail { color: #ff6b6b; }
+        .result-box .details { font-size: 1.1em; opacity: 0.9; }
+        .footer {
+            background: #1a1a2e; color: #aaa; padding: 15px;
+            text-align: center; border-radius: 0 0 15px 15px; font-size: 0.85em;
+        }
+        @media (max-width: 600px) {
+            .header h1 { font-size: 1.3em; }
+            .quiz-body { padding: 15px; }
+            .question-card { padding: 15px; }
+            .actions button, .actions a { padding: 12px 25px; font-size: 0.95em; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+<div class="header">
+        <h1>📋 Evaluación de Mecanismos</h1>
+        <p>Poleas, Palancas y Engranajes</p>
+        <div class="student-info">
+            <input type="text" id="studentName" placeholder="Nombre completo del estudiante">
+            <select id="studentGrade">
+                <option value="7mo">7° - Grado Septimo</option>
+                <option value="8vo" selected>8° - Grado Octavo</option>
+            </select>
+        </div>
+    </div>
+    </div>
+
+    <div class="quiz-body" id="quizContainer"></div>
+
+    <div class="result-box" id="resultBox">
+        <h2>📊 Resultado</h2>
+        <div class="grade" id="gradeDisplay">0.0</div>
+        <div class="details" id="detailsDisplay"></div>
+    </div>
+
+    <div class="actions">
+        <button class="btn-primary" id="submitBtn">✅ Entregar evaluación</button>
+        <button class="btn-secondary" id="resetBtn">🔄 Reiniciar</button>
+        <button class="btn-success" id="retryBtn" style="display:none;">🔁 Intentar de nuevo</button>
+    </div>
+
+    <div class="footer">
+        Evaluación diseñada para grado 7° - Máquinas simples y compuestas
+    </div>
+</div>
+
+<script>
+    const questions = [
+        {
+            question: "¿Qué tipo de polea permite reducir la fuerza necesaria a la mitad para levantar una carga?",
+            options: ["Polea fija", "Polea móvil", "Polipasto exponencial", "Polea con correa"],
+            answer: 1,
+            explanation: "La polea móvil tiene una ventaja mecánica de 2, reduciendo la fuerza a la mitad (F = R/2)."
+        },
+        {
+            question: "En una palanca de segundo grado, ¿dónde se encuentra la resistencia respecto al fulcro y la potencia?",
+            options: [
+                "Entre la potencia y el fulcro",
+                "En el extremo opuesto al fulcro",
+                "Entre el fulcro y la potencia",
+                "En el mismo punto que la potencia"
+            ],
+            answer: 2,
+            explanation: "En la palanca de segundo grado, la resistencia se encuentra entre el fulcro y la potencia (F — R — P)."
+        },
+        {
+            question: "¿Qué fórmula representa correctamente la ley de la palanca?",
+            options: ["F × R = Bp × Br", "P × Bp = R × Br", "P × R = Bp × Br", "P + Bp = R + Br"],
+            answer: 1,
+            explanation: "La ley de la palanca establece: Potencia × Brazo de potencia = Resistencia × Brazo de resistencia (P × Bp = R × Br)."
+        },
+        {
+            question: "¿Cuál de los siguientes es un ejemplo de palanca de tercer grado?",
+            options: ["Carretilla", "Tijeras", "Caña de pescar", "Cascanueces"],
+            answer: 2,
+            explanation: "La caña de pescar es una palanca de tercer grado: fulcro en un extremo, potencia en el medio y resistencia en el otro extremo."
+        },
+        {
+            question: "En un sistema de engranajes, si el piñón motriz tiene 20 dientes y gira a 600 rpm, y la rueda conducida tiene 40 dientes, ¿a qué velocidad gira la rueda conducida?",
+            options: ["1200 rpm", "600 rpm", "300 rpm", "150 rpm"],
+            answer: 2,
+            explanation: "N₁ × Z₁ = N₂ × Z₂ → 600 × 20 = N₂ × 40 → N₂ = 12000/40 = 300 rpm."
+        },
+        {
+            question: "¿Qué ventaja principal ofrece una polea fija?",
+            options: [
+                "Reduce la fuerza a la mitad",
+                "Cambia la dirección de la fuerza",
+                "Multiplica la fuerza por 4",
+                "Elimina la resistencia"
+            ],
+            answer: 1,
+            explanation: "La polea fija no reduce la fuerza (F = R), pero permite cambiar la dirección, haciendo más cómodo el trabajo."
+        },
+        {
+            question: "Las tijeras son un ejemplo de palanca de:",
+            options: ["Primer grado", "Segundo grado", "Tercer grado", "No son una palanca"],
+            answer: 0,
+            explanation: "Las tijeras son una palanca de primer grado: el fulcro está en el centro, entre la potencia (manos) y la resistencia (lo que se corta)."
+        },
+        {
+            question: "¿Qué es un polipasto?",
+            options: [
+                "Una polea fija",
+                "Una combinación de poleas fijas y móviles",
+                "Un tipo de engranaje",
+                "Una palanca especial"
+            ],
+            answer: 1,
+            explanation: "Un polipasto es un sistema que combina poleas fijas y móviles para multiplicar la fuerza aplicada."
+        },
+        {
+            question: "La relación de transmisión (RT) en engranajes se calcula como:",
+            options: ["Z₁ × Z₂", "Z₁ / Z₂", "Z₁ + Z₂", "Z₂ - Z₁"],
+            answer: 1,
+            explanation: "La relación de transmisión es RT = Z₁ / Z₂ (dientes del motriz entre dientes del conducido)."
+        },
+        {
+            question: "¿Qué tipo de engranaje se usa para transmitir movimiento entre ejes que se cruzan (generalmente a 90°)?",
+            options: ["Engranaje recto", "Engranaje helicoidal", "Engranaje cónico", "Cremallera"],
+            answer: 2,
+            explanation: "Los engranajes cónicos transmiten movimiento entre ejes que se cortan, normalmente a 90°."
+        },
+        {
+            question: "En una polea móvil, ¿cuántos segmentos de cuerda soportan la carga?",
+            options: ["1", "2", "3", "4"],
+            answer: 1,
+            explanation: "En una polea móvil, la carga está soportada por 2 segmentos de cuerda, lo que da una VM = 2."
+        },
+        {
+            question: "¿Cuál de estos objetos funciona como una palanca de primer grado?",
+            options: ["Carretilla", "Alicates", "Escoba", "Pinzas de depilar"],
+            answer: 1,
+            explanation: "Los alicates son palanca de primer grado: el fulcro está entre la potencia (manos) y la resistencia (objeto)."
+        },
+        {
+            question: "Si un polipasto potencial tiene 3 poleas móviles, la fuerza necesaria es:",
+            options: ["F = R/3", "F = R/6", "F = R/8", "F = R/2"],
+            answer: 1,
+            explanation: "Polipasto potencial: F = R/(2n) = R/(2×3) = R/6."
+        },
+        {
+            question: "¿Qué mecanismo convierte el movimiento circular en movimiento lineal?",
+            options: ["Polea fija", "Engranaje recto", "Piñón y cremallera", "Polea móvil"],
+            answer: 2,
+            explanation: "El sistema piñón-cremallera transforma el movimiento circular del piñón en movimiento lineal de la cremallera."
+        },
+        {
+            question: "En una palanca de segundo grado, la potencia siempre es:",
+            options: ["Mayor que la resistencia", "Menor que la resistencia", "Igual a la resistencia", "Depende del brazo"],
+            answer: 1,
+            explanation: "En 2° grado, Bp > Br, por lo tanto P < R. Siempre es multiplicadora de fuerza."
+        },
+        {
+            question: "¿Qué ocurre con el sentido de giro al añadir un engranaje loco (intermedio) entre dos engranajes?",
+            options: [
+                "Invierte el sentido del conducido",
+                "El conducido gira en el mismo sentido que el motriz",
+                "Detiene el movimiento",
+                "Duplica la velocidad"
+            ],
+            answer: 1,
+            explanation: "Un engranaje loco hace que el engranaje conducido gire en el mismo sentido que el motriz."
+        },
+        {
+            question: "¿Cuál es la ventaja mecánica de una polea fija?",
+            options: ["VM = 0", "VM = 1", "VM = 2", "VM = 4"],
+            answer: 1,
+            explanation: "La polea fija tiene VM = 1, ya que F = R. No multiplica la fuerza, solo cambia la dirección."
+        },
+        {
+            question: "¿Qué tipo de engranaje funciona de forma más silenciosa que un engranaje recto?",
+            options: ["Engranaje cónico recto", "Engranaje helicoidal", "Engranaje de cremallera", "Todos son iguales"],
+            answer: 1,
+            explanation: "Los engranajes helicoidales tienen dientes inclinados que engranan gradualmente, produciendo menos ruido y vibración."
+        },
+        {
+            question: "Para levantar una carga de 100 kg usando una palanca de primer grado con brazo de resistencia de 20 cm y brazo de potencia de 80 cm, ¿qué fuerza se requiere?",
+            options: ["50 kg", "25 kg", "100 kg", "400 kg"],
+            answer: 1,
+            explanation: "P × 80 = 100 × 20 → P = 2000/80 = 25 kg."
+        },
+        {
+            question: "¿Cuál de las siguientes NO es una máquina simple?",
+            options: ["Polea", "Palanca", "Motor eléctrico", "Plano inclinado"],
+            answer: 2,
+            explanation: "El motor eléctrico es una máquina compuesta. Las máquinas simples son: palanca, polea, plano inclinado, cuña, tornillo y rueda-eje."
+        }
+    ];
+
+    function shuffle(arr) {
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+    }
+
+    let selectedQuestions = [];
+    let userAnswers = {};
+    let submitted = false;
+
+    function initQuiz() {
+        const shuffled = shuffle([...questions]);
+        selectedQuestions = shuffled.slice(0, 20);
+        userAnswers = {};
+        submitted = false;
+        document.getElementById('submitBtn').style.display = 'inline-block';
+        document.getElementById('retryBtn').style.display = 'none';
+        document.getElementById('resultBox').classList.remove('show');
+        renderQuiz();
+    }
+
+    function renderQuiz() {
+        const container = document.getElementById('quizContainer');
+        container.innerHTML = '';
+        selectedQuestions.forEach((q, idx) => {
+            const card = document.createElement('div');
+            card.className = 'question-card';
+            card.id = `q-${idx}`;
+            const letters = ['A', 'B', 'C', 'D'];
+            let optionsHtml = '';
+            q.options.forEach((opt, oi) => {
+                const checked = userAnswers[idx] === oi ? 'checked' : '';
+                const selectedClass = userAnswers[idx] === oi ? 'selected' : '';
+                optionsHtml += `
+                    <label class="${selectedClass}" data-optindex="${oi}">
+                        <input type="radio" name="q${idx}" value="${oi}" ${checked} ${submitted ? 'disabled' : ''}>
+                        <span><strong>${letters[oi]}.</strong> ${opt}</span>
+                    </label>
+                `;
+            });
+            card.innerHTML = `
+                <div class="question-number">Pregunta ${idx + 1} de 20</div>
+                <div class="question-text">${q.question}</div>
+                <div class="options">${optionsHtml}</div>
+                <div class="feedback" id="fb-${idx}"></div>
+            `;
+            container.appendChild(card);
+
+            if (!submitted) {
+                const radios = card.querySelectorAll('input[type="radio"]');
+                radios.forEach(radio => {
+                    radio.addEventListener('change', (e) => {
+                        userAnswers[idx] = parseInt(e.target.value);
+                        const labels = card.querySelectorAll('.options label');
+                        labels.forEach((l, li) => {
+                            l.classList.toggle('selected', li === userAnswers[idx]);
+                        });
+                    });
+                });
+            }
+        });
+    }
+
+    function submitQuiz() {
+        const name = document.getElementById('studentName').value.trim();
+        const grade = document.getElementById('studentGrade').value.trim();
+        if (!name) {
+            alert('Por favor ingresa tu nombre completo.');
+            return;
+        }
+
+        let answeredCount = 0;
+        for (let i = 0; i < selectedQuestions.length; i++) {
+            if (userAnswers[i] !== undefined) answeredCount++;
+        }
+        if (answeredCount < selectedQuestions.length) {
+            const confirmSubmit = confirm(`Solo has respondido ${answeredCount} de ${selectedQuestions.length} preguntas. ¿Deseas entregar de todas formas?`);
+            if (!confirmSubmit) return;
+        }
+
+        submitted = true;
+        let correctCount = 0;
+
+        selectedQuestions.forEach((q, idx) => {
+            const card = document.getElementById(`q-${idx}`);
+            const feedback = document.getElementById(`fb-${idx}`);
+            const labels = card.querySelectorAll('.options label');
+            const selected = userAnswers[idx];
+            const isCorrect = selected === q.answer;
+
+            labels.forEach((l, oi) => {
+                l.classList.remove('selected', 'correct-answer', 'wrong-answer');
+                const radio = l.querySelector('input[type="radio"]');
+                radio.disabled = true;
+                if (oi === q.answer) l.classList.add('correct-answer');
+                if (selected === oi && !isCorrect) l.classList.add('wrong-answer');
+                if (selected === oi && isCorrect) l.classList.add('selected');
+            });
+
+            if (isCorrect) {
+                correctCount++;
+                card.classList.add('correct');
+                card.classList.remove('incorrect');
+            } else {
+                card.classList.add('incorrect');
+                card.classList.remove('correct');
+            }
+
+            feedback.className = `feedback show ${isCorrect ? 'correct' : 'incorrect'}`;
+            feedback.textContent = `${isCorrect ? '✅ Correcto!' : '❌ Incorrecto.'} ${q.explanation}`;
+        });
+
+        const gradeValue = (correctCount / selectedQuestions.length) * 5;
+        const displayGrade = gradeValue.toFixed(1);
+        const gradeEl = document.getElementById('gradeDisplay');
+        gradeEl.textContent = displayGrade;
+        gradeEl.classList.toggle('pass', gradeValue >= 3.0);
+        gradeEl.classList.toggle('fail', gradeValue < 3.0);
+
+        let performance;
+        if (gradeValue >= 4.5) performance = '🌟 ¡Excelente! Dominas muy bien los mecanismos.';
+        else if (gradeValue >= 3.0) performance = '👍 Bien, pero puedes repasar algunos conceptos.';
+        else performance = '📚 Necesitas repasar. Revisa la guía de estudio e intenta de nuevo.';
+
+        document.getElementById('detailsDisplay').innerHTML = `
+            <p><strong>Estudiante:</strong> ${name} ${grade ? '| <strong>Curso:</strong> ' + grade : ''}</p>
+            <p>✅ Correctas: ${correctCount} / ${selectedQuestions.length} &nbsp;|&nbsp; ❌ Incorrectas: ${selectedQuestions.length - correctCount}</p>
+            <p>${performance}</p>
+            <p style="margin-top:10px;font-size:0.85em;opacity:0.7;">
+                ${new Date().toLocaleString('es-CO')}
+            </p>
+        `;
+
+        document.getElementById('resultBox').classList.add('show');
+        document.getElementById('submitBtn').style.display = 'none';
+        document.getElementById('retryBtn').style.display = 'inline-block';
+        window.scrollTo({ top: document.querySelector('.header').offsetTop, behavior: 'smooth' });
+    }
+
+    function resetQuiz() {
+        initQuiz();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    document.getElementById('submitBtn').addEventListener('click', submitQuiz);
+    document.getElementById('resetBtn').addEventListener('click', resetQuiz);
+    document.getElementById('retryBtn').addEventListener('click', resetQuiz);
+
+    initQuiz();
+</script>
+</body>
+</html>

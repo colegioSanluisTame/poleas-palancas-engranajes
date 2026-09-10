@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Poleas, Palancas y Engranajes - Grado 7°</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Segoe UI',Arial,sans-serif; background:#eef1f5; color:#1a1a2e; line-height:1.6; }
+.container { max-width:960px; margin:0 auto; padding:15px; }
+
+/* PORTADA */
+.portada { background:linear-gradient(135deg,#0f3460,#1a5276,#e94560); color:#fff; padding:45px 25px; border-radius:15px; text-align:center; margin-bottom:15px; box-shadow:0 8px 25px rgba(0,0,0,.2); }
+.portada h1 { font-size:2em; margin-bottom:5px; }
+.portada h2 { font-size:1.1em; font-weight:400; opacity:.95; }
+.portada .datos-est { background:rgba(255,255,255,.12); padding:15px; border-radius:10px; margin-top:15px; max-width:420px; margin-left:auto; margin-right:auto; }
+.portada .datos-est input { width:100%; padding:9px; margin:4px 0; border:none; border-radius:6px; font-size:.95em; background:rgba(255,255,255,.9); }
+
+/* TABS */
+.tabs { display:flex; gap:0; margin-bottom:0; background:#1a1a2e; border-radius:12px 12px 0 0; overflow:hidden; }
+.tab-btn { flex:1; padding:13px 8px; border:none; cursor:pointer; font-size:.95em; font-weight:600; transition:all .3s; background:#1a1a2e; color:#8899aa; text-align:center; }
+.tab-btn:hover { background:#2a2a4e; color:#ddd; }
+.tab-btn.activo { background:#fff; color:#0f3460; box-shadow:0 -3px 0 #e94560 inset; }
+.tab-content { display:none; background:#fff; border-radius:0 0 12px 12px; padding:25px; }
+.tab-content.activo { display:block; }
+
+h2 { color:#0f3460; font-size:1.4em; border-bottom:3px solid #e94560; padding-bottom:5px; margin:18px 0 12px 0; }
+h3 { color:#16213e; font-size:1.1em; margin:15px 0 8px 0; background:#f0f2f5; padding:7px 12px; border-radius:6px; }
+h4 { color:#0f3460; margin:10px 0 4px 0; font-size:1em; }
+
+table { width:100%; border-collapse:collapse; margin:12px 0; font-size:.9em; }
+th,td { border:1px solid #dee2e6; padding:7px; text-align:left; }
+th { background:#0f3460; color:#fff; font-weight:600; }
+tr:nth-child(even) { background:#f8f9fa; }
+
+.formula-box { background:#e8f4fd; border-left:5px solid #0f3460; padding:12px; margin:12px 0; border-radius:0 8px 8px 0; font-weight:500; }
+.ejemplo { background:#fef9e7; border-left:5px solid #f1c40f; padding:12px; margin:12px 0; border-radius:0 8px 8px 0; }
+.info-box { background:#e8f5e9; border-left:5px solid #28a745; padding:10px; margin:10px 0; border-radius:0 8px 8px 0; }
+ul,ol { padding-left:22px; margin:8px 0; }
+li { margin:3px 0; }
+
+/* GALERIA VISUAL */
+.galeria { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:12px; margin:15px 0; }
+.galeria-item { text-align:center; background:#f8f9fa; padding:10px; border-radius:10px; border:2px solid #dee2e6; transition:all .3s; cursor:default; }
+.galeria-item:hover { border-color:#0f3460; box-shadow:0 4px 12px rgba(0,0,0,.1); transform:translateY(-3px); }
+.galeria-item svg { max-width:100%; height:auto; }
+.galeria-item .nom { font-weight:700; color:#0f3460; font-size:.85em; margin-top:4px; }
+.galeria-item .uso { font-size:.75em; color:#666; }
+
+/* TARJETAS DE IDENTIFICACION */
+.id-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:12px; margin:15px 0; }
+.id-card { border:2px solid #dee2e6; border-radius:10px; padding:12px; background:#f8f9fa; text-align:center; transition:all .3s; }
+.id-card:hover { border-color:#0f3460; box-shadow:0 4px 12px rgba(0,0,0,.1); }
+.id-card h5 { color:#0f3460; margin:4px 0; font-size:.95em; }
+.id-card .label-tipo { display:inline-block; padding:2px 10px; border-radius:10px; font-size:.75em; font-weight:600; color:#fff; margin:3px 0; }
+.id-card .tipo1 { background:#e94560; }
+.id-card .tipo2 { background:#28a745; }
+.id-card .tipo3 { background:#f39c12; }
+.id-card .tipo-polea { background:#0f3460; }
+.id-card .tipo-eng { background:#8e44ad; }
+
+/* EJERCICIOS */
+.ejercicio { background:#f8f9fa; border:1px solid #dee2e6; padding:18px; margin:12px 0; border-radius:10px; border-left:4px solid #e94560; }
+.ejercicio .num-ej { font-weight:700; color:#e94560; font-size:1em; }
+.ejercicio .pista { font-size:.82em; color:#666; background:#eef2f7; padding:5px 10px; border-radius:5px; margin-top:5px; display:inline-block; }
+
+/* INTERACTIVO: ARRASTRAR */
+.match-container { display:flex; flex-wrap:wrap; gap:15px; margin:15px 0; justify-content:center; }
+.match-col { flex:1; min-width:200px; }
+.match-item { background:#f8f9fa; border:2px solid #dee2e6; border-radius:8px; padding:8px; margin:5px 0; text-align:center; cursor:pointer; transition:all .3s; }
+.match-item:hover { border-color:#0f3460; }
+.match-item.seleccionado { border-color:#e94560; background:#fbe9e7; }
+.match-item.emparejado { border-color:#28a745; background:#e8f5e9; opacity:.7; cursor:default; }
+
+/* EVALUACION */
+.pregunta { background:#f8f9fa; border:1px solid #dee2e6; padding:15px; margin:12px 0; border-radius:10px; border-left:4px solid #0f3460; }
+.pregunta .qtext { font-weight:600; margin-bottom:6px; font-size:.98em; }
+.pregunta .opts > div { margin:5px 0; display:flex; align-items:center; gap:8px; }
+.pregunta .opts input { width:17px; height:17px; accent-color:#0f3460; }
+.pregunta .opts label { cursor:pointer; flex:1; font-size:.93em; }
+.respuesta-eval { display:none; margin-top:6px; padding:8px; border-radius:6px; font-size:.9em; }
+
+.btn { display:inline-block; padding:11px 25px; border:none; border-radius:8px; font-size:.95em; font-weight:600; cursor:pointer; margin:4px; transition:all .3s; }
+.btn-primary { background:#0f3460; color:#fff; }
+.btn-primary:hover { background:#1a5276; transform:translateY(-2px); }
+.btn-success { background:#28a745; color:#fff; }
+.btn-success:hover { background:#218838; transform:translateY(-2px); }
+.btn-danger { background:#e94560; color:#fff; }
+.btn-danger:hover { background:#c23152; transform:translateY(-2px); }
+.btn-warning { background:#f39c12; color:#fff; }
+.btn-warning:hover { background:#d68910; transform:translateY(-2px); }
+
+.resultado { display:none; background:linear-gradient(135deg,#0f3460,#1a5276); color:#fff; padding:25px; border-radius:12px; text-align:center; margin:20px 0; }
+.resultado.mostrar { display:block; }
+.resultado .nota { font-size:3.2em; font-weight:800; margin:5px 0; }
+.resultado .nota.aprobado { color:#ffd700; }
+.resultado .nota.reprobado { color:#ff6b6b; }
+.contador { font-size:.88em; color:#666; margin-bottom:8px; }
+
+@media print { .no-print,.tabs { display:none!important; } .tab-content { display:block!important; } }
+@media (max-width:600px) {
+    .portada h1 { font-size:1.3em; }
+    .tab-btn { font-size:.8em; padding:8px 4px; }
+    .tab-content { padding:12px; }
+    .galeria { grid-template-columns:repeat(2,1fr); }
+    .id-grid { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- PORTADA -->
+<div class="portada">
+    <h1>🔧 POLEAS, PALANCAS Y ENGRANAJES</h1>
+    <h2>Guía + Taller + Evaluación ICFES · Grado 7°</h2>
+    <p style="font-size:.85em;opacity:.85;">Colombia - Educación Básica Secundaria</p>
+    <div class="datos-est no-print">
+        <input type="text" id="nombreEst" placeholder="Tu nombre completo">
+        <input type="text" id="cursoEst" placeholder="Curso (ej: 7°A)">
+    </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs no-print">
+    <button class="tab-btn activo" onclick="abrirTab('guia')">📖 Guía</button>
+    <button class="tab-btn" onclick="abrirTab('taller')">✏️ Taller</button>
+    <button class="tab-btn" onclick="abrirTab('evaluacion')">📝 Evaluación</button>
+</div>
+
+<!-- ===================== TAB 1: GUIA ===================== -->
+<div class="tab-content activo" id="tab-guia">
+
+<h2>⚙️ POLEAS</h2>
+<p>Una <strong>polea</strong> es una rueda con ranura por donde pasa una cuerda. Sirve para cambiar la dirección de la fuerza o reducir el esfuerzo al levantar cargas.</p>
+
+<h3>🔸 Tipos de poleas</h3>
+<div class="galeria">
+    <div class="galeria-item">
+        <svg viewBox="0 0 100 120" width="100" height="120">
+            <circle cx="50" cy="40" r="25" fill="none" stroke="#0f3460" stroke-width="3.5"/>
+            <circle cx="50" cy="40" r="5" fill="#e94560"/>
+            <line x1="50" y1="15" x2="50" y2="3" stroke="#333" stroke-width="3"/>
+            <rect x="43" y="0" width="14" height="5" rx="2" fill="#555"/>
+            <line x1="28" y1="60" x2="12" y2="115" stroke="#888" stroke-width="2.5" stroke-dasharray="4,3"/>
+            <line x1="72" y1="60" x2="88" y2="115" stroke="#888" stroke-width="2.5" stroke-dasharray="4,3"/>
+            <rect x="8" y="111" width="8" height="6" rx="1" fill="#555"/>
+            <rect x="84" y="111" width="8" height="6" rx="1" fill="#555"/>
+            <text x="50" y="100" text-anchor="middle" font-size="10" fill="#e94560" font-weight="bold">F = R</text>
+            <text x="50" y="80" text-anchor="middle" font-size="8" fill="#666">VM = 1</text>
+        </svg>
+        <div class="nom">Polea fija</div>
+        <div class="uso">No ahorra fuerza. Cambia dirección. Ej: bandera, pozo.</div>
+    </div>
+    <div class="galeria-item">
+        <svg viewBox="0 0 100 130" width="100" height="130">
+            <circle cx="50" cy="25" r="5" fill="#0f3460"/>
+            <line x1="50" y1="25" x2="50" y2="12" stroke="#333" stroke-width="2.5"/>
+            <rect x="44" y="8" width="12" height="6" rx="2" fill="#555"/>
+            <circle cx="50" cy="65" r="22" fill="none" stroke="#0f3460" stroke-width="3"/>
+            <circle cx="50" cy="65" r="4" fill="#e94560"/>
+            <line x1="50" y1="87" x2="50" y2="105" stroke="#333" stroke-width="3"/>
+            <rect x="40" y="102" width="20" height="15" rx="3" fill="#888"/>
+            <text x="50" y="125" text-anchor="middle" font-size="7" fill="#888">CARGA</text>
+            <line x1="28" y1="65" x2="5" y2="10" stroke="#888" stroke-width="2.5" stroke-dasharray="4,3"/>
+            <line x1="72" y1="65" x2="92" y2="115" stroke="#888" stroke-width="2.5" stroke-dasharray="4,3"/>
+            <polygon points="5,10 7,5 9,11" fill="#555"/>
+            <text x="50" y="50" text-anchor="middle" font-size="10" fill="#e94560" font-weight="bold">F = R/2</text>
+            <text x="50" y="42" text-anchor="middle" font-size="8" fill="#666">VM = 2</text>
+        </svg>
+        <div class="nom">Polea móvil</div>
+        <div class="uso">Reduce fuerza a la mitad. Ej: grúa pequeña, elevador.</div>
+    </div>
+    <div class="galeria-item">
+        <svg viewBox="0 0 120 140" width="120" height="140">
+            <line x1="20" y1="5" x2="20" y2="40" stroke="#333" stroke-width="2"/>
+            <line x1="100" y1="5" x2="100" y2="40" stroke="#333" stroke-width="2"/>
+            <rect x="14" y="2" width="12" height="5" rx="2" fill="#555"/>
+            <rect x="94" y="2" width="12" height="5" rx="2" fill="#555"/>
+            <circle cx="20" cy="32" r="14" fill="none" stroke="#0f3460" stroke-width="2.5"/>
+            <circle cx="100" cy="32" r="14" fill="none" stroke="#0f3460" stroke-width="2.5"/>
+            <circle cx="20" cy="32" r="3" fill="#e94560"/>
+            <circle cx="100" cy="32" r="3" fill="#e94560"/>
+            <circle cx="60" cy="80" r="14" fill="none" stroke="#0f3460" stroke-width="2.5"/>
+            <circle cx="60" cy="80" r="3" fill="#e94560"/>
+            <line x1="60" y1="94" x2="60" y2="110" stroke="#333" stroke-width="2.5"/>
+            <rect x="48" y="108" width="24" height="18" rx="3" fill="#888"/>
+            <text x="60" y="135" text-anchor="middle" font-size="7" fill="#888">CARGA</text>
+            <path d="M 14 46 Q 60 120 106 46" fill="none" stroke="#888" stroke-width="2" stroke-dasharray="4,3"/>
+            <path d="M 26 46 Q 60 105 94 46" fill="none" stroke="#888" stroke-width="2" stroke-dasharray="4,3"/>
+            <text x="60" y="60" text-anchor="middle" font-size="9" fill="#e94560" font-weight="bold">F = R/2n</text>
+        </svg>
+        <div class="nom">Polipasto</div>
+        <div class="uso">Varias poleas. Gran ahorro de fuerza. Ej: grúa, ascensor.</div>
+    </div>
+    <div class="galeria-item">
+        <svg viewBox="0 0 100 80" width="100" height="80">
+            <circle cx="25" cy="40" r="18" fill="none" stroke="#0f3460" stroke-width="3"/>
+            <circle cx="75" cy="40" r="18" fill="none" stroke="#0f3460" stroke-width="3"/>
+            <circle cx="25" cy="40" r="3" fill="#e94560"/>
+            <circle cx="75" cy="40" r="3" fill="#e94560"/>
+            <line x1="43" y1="35" x2="57" y2="35" stroke="#555" stroke-width="2"/>
+            <line x1="43" y1="45" x2="57" y2="45" stroke="#555" stroke-width="2"/>
+            <line x1="43" y1="35" x2="43" y2="45" stroke="#555" stroke-width="1.5"/>
+            <line x1="57" y1="35" x2="57" y2="45" stroke="#555" stroke-width="1.5"/>
+            <text x="50" y="72" text-anchor="middle" font-size="9" fill="#0f3460">Con correa</text>
+        </svg>
+        <div class="nom">Poleas con correa</div>
+        <div class="uso">Transmite movimiento entre ejes. Ej: máquina de coser, motor.</div>
+    </div>
+</div>
+
+<div class="ejemplo">
+    <strong>🔹 ¿Dónde ves poleas en tu vida?</strong><br>
+    • <strong>Colegio:</strong> Izada de bandera (polea fija), persianas del salón (polea fija)<br>
+    • <strong>Casa:</strong> Tendedero de ropa (polea fija), persianas, cortinas<br>
+    • <strong>Calle:</strong> Grúa de construcción (polipasto), ascensor del edificio (polipasto)<br>
+    • <strong>Deporte:</strong> Máquinas de gimnasio (poleas con pesas), velero (poleas para izar velas)<br>
+    • <strong>Campo:</strong> Pozo de agua (polea fija), molino (poleas con correa)
+</div>
+
+<!-- ============== PALANCAS ============== -->
+<h2>📐 PALANCAS</h2>
+<p>Una <strong>palanca</strong> es una barra rígida que gira sobre un punto de apoyo (fulcro). La ley de la palanca es: <strong>P × Bp = R × Br</strong></p>
+
+<h3>🔸 Los 3 tipos de palanca</h3>
+<div class="galeria">
+    <div class="galeria-item">
+        <svg viewBox="0 0 170 80" width="170" height="80">
+            <line x1="10" y1="60" x2="160" y2="20" stroke="#8B4513" stroke-width="6" stroke-linecap="round"/>
+            <polygon points="80,42 95,42 87,62" fill="#0f3460"/>
+            <text x="87" y="72" text-anchor="middle" font-size="9" fill="#0f3460" font-weight="bold">▲ Fulcro</text>
+            <text x="30" y="52" font-size="10" fill="#e94560" font-weight="bold">P ↓</text>
+            <text x="140" y="25" font-size="10" fill="#d4a017" font-weight="bold">R ↑</text>
+            <text x="85" y="12" text-anchor="middle" font-size="9" fill="#0f3460" font-weight="bold">1er GRADO</text>
+            <text x="85" y="85" text-anchor="middle" font-size="7" fill="#666">P — ▲ — R</text>
+        </svg>
+        <div class="nom">Primer grado</div>
+        <div class="uso">Fulcro en el medio. Tijeras, balancín, alicates.</div>
+    </div>
+    <div class="galeria-item">
+        <svg viewBox="0 0 170 80" width="170" height="80">
+            <line x1="10" y1="60" x2="160" y2="20" stroke="#8B4513" stroke-width="6" stroke-linecap="round"/>
+            <polygon points="45,47 57,47 51,64" fill="#0f3460"/>
+            <text x="51" y="74" text-anchor="middle" font-size="9" fill="#0f3460" font-weight="bold">▲ Fulcro</text>
+            <text x="140" y="25" font-size="10" fill="#e94560" font-weight="bold">P ↓</text>
+            <text x="80" y="40" font-size="10" fill="#d4a017" font-weight="bold">R ↑</text>
+            <text x="85" y="12" text-anchor="middle" font-size="9" fill="#0f3460" font-weight="bold">2do GRADO</text>
+            <text x="85" y="85" text-anchor="middle" font-size="7" fill="#666">▲ — R — P</text>
+        </svg>
+        <div class="nom">Segundo grado</div>
+        <div class="uso">Resistencia en el medio. Carretilla, cascanueces.</div>
+    </div>
+    <div class="galeria-item">
+        <svg viewBox="0 0 170 80" width="170" height="80">
+            <line x1="10" y1="60" x2="160" y2="20" stroke="#8B4513" stroke-width="6" stroke-linecap="round"/>
+            <polygon points="45,47 57,47 51,64" fill="#0f3460"/>
+            <text x="51" y="74" text-anchor="middle" font-size="9" fill="#0f3460" font-weight="bold">▲ Fulcro</text>
+            <text x="90" y="35" font-size="10" fill="#e94560" font-weight="bold">P ↓</text>
+            <text x="140" y="25" font-size="10" fill="#d4a017" font-weight="bold">R ↑</text>
+            <text x="85" y="12" text-anchor="middle" font-size="9" fill="#0f3460" font-weight="bold">3er GRADO</text>
+            <text x="85" y="85" text-anchor="middle" font-size="7" fill="#666">▲ — P — R</text>
+        </svg>
+        <div class="nom">Tercer grado</div>
+        <div class="uso">Potencia en el medio. Caña de pescar, escoba.</div>
+    </div>
+</div>
+
+<h3>🔸 Identifica cada palanca en la vida real</h3>
+<div class="id-grid">
+    <div class="id-card"><svg viewBox="0 0 80 50" width="70" height="45"><line x1="5" y1="40" x2="40" y2="10" stroke="#8B4513" stroke-width="5"/><line x1="40" y1="10" x2="75" y2="40" stroke="#8B4513" stroke-width="5"/><circle cx="40" cy="10" r="3" fill="#0f3460"/><text x="40" y="22" text-anchor="middle" font-size="6">▲</text></svg><h5>✂️ Tijeras</h5><span class="label-tipo tipo1">1er grado</span></div>
+    <div class="id-card"><svg viewBox="0 0 80 50" width="70" height="45"><line x1="5" y1="45" x2="75" y2="10" stroke="#8B4513" stroke-width="5"/><circle cx="10" cy="42" r="5" fill="none" stroke="#0f3460" stroke-width="2"/><circle cx="10" cy="42" r="2" fill="#e94560"/><rect x="30" y="25" width="12" height="10" rx="2" fill="#d4a017"/><text x="10" y="38" text-anchor="middle" font-size="5">▲</text></svg><h5>🛒 Carretilla</h5><span class="label-tipo tipo2">2do grado</span></div>
+    <div class="id-card"><svg viewBox="0 0 80 50" width="70" height="45"><line x1="5" y1="45" x2="75" y2="5" stroke="#8B4513" stroke-width="3"/><circle cx="5" cy="45" r="3" fill="#0f3460"/><text x="5" y="38" text-anchor="end" font-size="5">▲</text><text x="25" y="35" font-size="5" fill="#e94560">P</text><text x="65" y="12" font-size="5" fill="#d4a017">R</text></svg><h5>🎣 Caña de pescar</h5><span class="label-tipo tipo3">3er grado</span></div>
+    <div class="id-card"><svg viewBox="0 0 80 50" width="70" height="45"><line x1="5" y1="40" x2="40" y2="10" stroke="#8B4513" stroke-width="5"/><line x1="40" y1="10" x2="75" y2="40" stroke="#8B4513" stroke-width="5"/><circle cx="40" cy="10" r="3" fill="#0f3460"/><text x="40" y="22" text-anchor="middle" font-size="6">▲</text></svg><h5>⚖️ Balancín</h5><span class="label-tipo tipo1">1er grado</span></div>
+    <div class="id-card"><svg viewBox="0 0 80 50" width="70" height="45"><line x1="5" y1="45" x2="75" y2="10" stroke="#8B4513" stroke-width="5"/><circle cx="10" cy="42" r="5" fill="none" stroke="#0f3460" stroke-width="2"/><circle cx="10" cy="42" r="2" fill="#e94560"/><rect x="25" y="30" width="12" height="8" rx="2" fill="#d4a017"/></svg><h5>🥜 Cascanueces</h5><span class="label-tipo tipo2">2do grado</span></div>
+    <div class="id-card"><svg viewBox="0 0 80 50" width="70" height="45"><line x1="5" y1="45" x2="75" y2="5" stroke="#8B4513" stroke-width="3"/><circle cx="5" cy="45" r="3" fill="#0f3460"/><text x="5" y="38" text-anchor="end" font-size="5">▲</text><text x="40" y="22" font-size="5" fill="#e94560">P</text></svg><h5>🧹 Escoba</h5><span class="label-tipo tipo3">3er grado</span></div>
+    <div class="id-card"><svg viewBox="0 0 80 50" width="70" height="45"><line x1="5" y1="40" x2="40" y2="10" stroke="#8B4513" stroke-width="5"/><line x1="40" y1="10" x2="75" y2="40" stroke="#8B4513" stroke-width="5"/><circle cx="40" cy="10" r="3" fill="#0f3460"/><text x="40" y="22" text-anchor="middle" font-size="6">▲</text></svg><h5>🔧 Alicates</h5><span class="label-tipo tipo1">1er grado</span></div>
+    <div class="id-card"><svg viewBox="0 0 80 50" width="70" height="45"><line x1="5" y1="45" x2="75" y2="10" stroke="#8B4513" stroke-width="5"/><circle cx="10" cy="42" r="5" fill="none" stroke="#0f3460" stroke-width="2"/><circle cx="10" cy="42" r="2" fill="#e94560"/><rect x="25" y="30" width="12" height="8" rx="2" fill="#d4a017"/></svg><h5>🍾 Abrebotellas</h5><span class="label-tipo tipo2">2do grado</span></div>
+    <div class="id-card"><svg viewBox="0 0 80 50" width="70" height="45"><line x1="5" y1="45" x2="75" y2="5" stroke="#8B4513" stroke-width="3"/><circle cx="5" cy="45" r="3" fill="#0f3460"/><text x="5" y="38" text-anchor="end" font-size="5">▲</text><text x="25" y="35" font-size="5" fill="#e94560">P</text><text x="65" y="12" font-size="5" fill="#d4a017">R</text></svg><h5>💪 Brazo humano</h5><span class="label-tipo tipo3">3er grado</span></div>
+</div>
+
+<!-- ============== ENGRANAJES ============== -->
+<h2>⚙️ ENGRANAJES</h2>
+<p>Son <strong>ruedas dentadas</strong> que transmiten movimiento circular. Se usan para cambiar velocidad o dirección de giro.</p>
+
+<div class="galeria">
+    <div class="galeria-item">
+        <svg viewBox="0 0 120 80" width="120" height="80">
+            <defs><g id="gr"><circle cx="0" cy="0" r="18" fill="none" stroke="#0f3460" stroke-width="3"/><circle cx="0" cy="0" r="5" fill="#e94560"/><g fill="#0f3460"><rect x="-2" y="-22" width="4" height="7" rx="1"/><rect x="-2" y="15" width="4" height="7" rx="1"/><rect x="-22" y="-2" width="7" height="4" rx="1"/><rect x="15" y="-2" width="7" height="4" rx="1"/><rect x="13" y="-16" width="4" height="7" rx="1" transform="rotate(45)"/><rect x="-17" y="9" width="4" height="7" rx="1" transform="rotate(45)"/><rect x="-17" y="-16" width="4" height="7" rx="1" transform="rotate(-45)"/><rect x="13" y="9" width="4" height="7" rx="1" transform="rotate(-45)"/></g></g></defs>
+            <use href="#gr" x="30" y="40"/>
+            <use href="#gr" x="90" y="40"/>
+            <text x="30" y="70" text-anchor="middle" font-size="8" fill="#0f3460">Z=20</text>
+            <text x="90" y="70" text-anchor="middle" font-size="8" fill="#0f3460">Z=40</text>
+        </svg>
+        <div class="nom">Rectos</div>
+        <div class="uso">Ejes paralelos. Taladros, lavadoras.</div>
+    </div>
+    <div class="galeria-item">
+        <svg viewBox="0 0 120 80" width="120" height="80">
+            <defs><g id="gh"><circle cx="0" cy="0" r="18" fill="none" stroke="#0f3460" stroke-width="3"/><circle cx="0" cy="0" r="5" fill="#e94560"/><g fill="#0f3460"><rect x="-2" y="-22" width="4" height="7" rx="1" transform="rotate(15)"/><rect x="-2" y="15" width="4" height="7" rx="1" transform="rotate(15)"/><rect x="-22" y="-2" width="7" height="4" rx="1" transform="rotate(15)"/><rect x="15" y="-2" width="7" height="4" rx="1" transform="rotate(15)"/><rect x="13" y="-16" width="4" height="7" rx="1" transform="rotate(60)"/><rect x="-17" y="9" width="4" height="7" rx="1" transform="rotate(60)"/><rect x="-17" y="-16" width="4" height="7" rx="1" transform="rotate(-30)"/><rect x="13" y="9" width="4" height="7" rx="1" transform="rotate(-30)"/></g></g></defs>
+            <use href="#gh" x="30" y="40"/>
+            <use href="#gh" x="90" y="40"/>
+        </svg>
+        <div class="nom">Helicoidales</div>
+        <div class="uso">Silenciosos. Caja de cambios del carro.</div>
+    </div>
+    <div class="galeria-item">
+        <svg viewBox="0 0 120 80" width="120" height="80">
+            <defs><g id="gc"><circle cx="0" cy="0" r="18" fill="none" stroke="#0f3460" stroke-width="3"/><circle cx="0" cy="0" r="5" fill="#e94560"/><g fill="#0f3460"><rect x="-2" y="-22" width="4" height="7" rx="1"/><rect x="-2" y="15" width="4" height="7" rx="1"/><rect x="-22" y="-2" width="7" height="4" rx="1"/><rect x="15" y="-2" width="7" height="4" rx="1"/><rect x="13" y="-16" width="4" height="7" rx="1" transform="rotate(45)"/><rect x="-17" y="9" width="4" height="7" rx="1" transform="rotate(45)"/><rect x="-17" y="-16" width="4" height="7" rx="1" transform="rotate(-45)"/><rect x="13" y="9" width="4" height="7" rx="1" transform="rotate(-45)"/></g></g></defs>
+            <use href="#gc" x="35" y="50" transform="rotate(20,35,50)"/>
+            <use href="#gc" x="95" y="30" transform="rotate(-30,95,30)"/>
+        </svg>
+        <div class="nom">Cónicos</div>
+        <div class="uso">Ejes a 90°. Diferencial del carro.</div>
+    </div>
+    <div class="galeria-item">
+        <svg viewBox="0 0 120 80" width="120" height="80">
+            <rect x="5" y="35" width="50" height="10" rx="3" fill="#0f3460"/>
+            <line x1="5" y1="38" x2="55" y2="38" stroke="#ddd" stroke-width="1"/>
+            <line x1="5" y1="42" x2="55" y2="42" stroke="#ddd" stroke-width="1"/>
+            <text x="28" y="25" text-anchor="middle" font-size="7" fill="#0f3460">TORNILLO</text>
+            <circle cx="85" cy="40" r="18" fill="none" stroke="#0f3460" stroke-width="3"/>
+            <circle cx="85" cy="40" r="5" fill="#e94560"/>
+            <text x="85" y="70" text-anchor="middle" font-size="7" fill="#0f3460">CORONA</text>
+        </svg>
+        <div class="nom">Tornillo sin fin</div>
+        <div class="uso">Gran reducción. Puerta garaje, guitarra.</div>
+    </div>
+</div>
+
+<div class="ejemplo">
+    <strong>🔹 ¿Dónde ves engranajes en tu vida?</strong><br>
+    • <strong>Bicicleta:</strong> Plato + piñón + cadena (engranajes con cadena)<br>
+    • <strong>Carro:</strong> Caja de cambios (helicoidales), diferencial (cónicos), dirección (cremallera)<br>
+    • <strong>Casa:</strong> Taladro (rectos), batidora (rectos), reloj (tren de engranajes)<br>
+    • <strong>Música:</strong> Clavijas de guitarra (tornillo sin fin)<br>
+    • <strong>Colegio:</strong> Tajalápiz manual (engranaje recto), sacapuntas de pared
+</div>
+
+<div class="info-box">
+    <strong>💡 Truco:</strong> El engranaje <strong>más pequeño</strong> gira <strong>más rápido</strong>. El <strong>más grande</strong> gira <strong>más lento</strong> pero con más fuerza. Fórmula: <strong>N₁ × Z₁ = N₂ × Z₂</strong>
+</div>
+
+<h2>🔩 MÁQUINAS SIMPLES VS COMPUESTAS</h2>
+<table>
+    <tr><th></th><th>Máquina simple</th><th>Máquina compuesta</th></tr>
+    <tr><td><strong>¿Qué es?</strong></td><td>Un solo mecanismo</td><td>Dos o más máquinas simples combinadas</td></tr>
+    <tr><td><strong>Ejemplos</strong></td><td>Polea, palanca, plano inclinado, cuña, tornillo, rueda</td><td>Bicicleta, carro, grúa, ascensor, reloj</td></tr>
+    <tr><td><strong>Bicicleta</strong></td><td>—</td><td>Palancas (pedales) + Engranajes (plato-piñón) + Cadena + Ruedas</td></tr>
+    <tr><td><strong>Grúa</strong></td><td>—</td><td>Polipasto (poleas) + Palancas + Engranajes (motor) + Torno</td></tr>
+    <tr><td><strong>Ascensor</strong></td><td>—</td><td>Polipasto (poleas) + Engranajes (motor reductor) + Palancas</td></tr>
+</table>
+
+</div><!-- /tab-guia -->
+
+<!-- ===================== TAB 2: TALLER ===================== -->
+<div class="tab-content" id="tab-taller">
+
+<h2>✏️ TALLER PRÁCTICO</h2>
+<p><strong>Nombre:</strong> <span id="tallerNombre">______________</span> | <strong>Curso:</strong> <span id="tallerCurso">______________</span></p>
+<p style="background:#fef9e7;padding:10px;border-radius:8px;border-left:4px solid #f1c40f;">
+📌 <strong>Instrucciones:</strong> Observa bien las imágenes, identifica cada mecanismo, escribe en tu cuaderno o directamente en las líneas. ¡Aprende a diferenciar poleas, palancas y engranajes!
+</p>
+
+<!-- ===== ACTIVIDAD 1: IDENTIFICAR POLEAS ===== -->
+<h3>📍 ACTIVIDAD 1: ¿Qué tipo de polea es?</h3>
+<p>Observa cada imagen y escribe si es <strong>polea fija, polea móvil, polipasto o poleas con correa</strong>.</p>
+
+<div class="galeria" style="grid-template-columns:repeat(4,1fr);">
+    <div class="galeria-item">
+        <svg viewBox="0 0 100 110" width="90" height="100">
+            <circle cx="50" cy="35" r="22" fill="none" stroke="#0f3460" stroke-width="3"/>
+            <circle cx="50" cy="35" r="4" fill="#e94560"/>
+            <line x1="50" y1="13" x2="50" y2="2" stroke="#333" stroke-width="2.5"/>
+            <polygon points="44,2 56,2 50,-3" fill="#333"/>
+            <line x1="30" y1="52" x2="15" y2="105" stroke="#888" stroke-width="2" stroke-dasharray="4,3"/>
+            <line x1="70" y1="52" x2="85" y2="105" stroke="#888" stroke-width="2" stroke-dasharray="4,3"/>
+            <rect x="12" y="102" width="7" height="6" rx="1" fill="#555"/>
+            <rect x="81" y="102" width="7" height="6" rx="1" fill="#555"/>
+        </svg>
+        <div class="nom">Imagen A</div>
+        <p style="font-size:.8em;">Tipo: ______</p>
+    </div>
+    <div class="galeria-item">
+        <svg viewBox="0 0 100 110" width="90" height="100">
+            <circle cx="50" cy="35" r="4" fill="#0f3460"/>
+            <line x1="50" y1="35" x2="50" y2="22" stroke="#333" stroke-width="2"/>
+            <rect x="44" y="18" width="12" height="6" rx="2" fill="#555"/>
+            <circle cx="50" cy="65" r="20" fill="none" stroke="#0f3460" stroke-width="2.5"/>
+            <circle cx="50" cy="65" r="3" fill="#e94560"/>
+            <line x1="50" y1="85" x2="50" y2="100" stroke="#333" stroke-width="2.5"/>
+            <rect x="42" y="97" width="16" height="10" rx="2" fill="#888"/>
+            <line x1="30" y1="65" x2="12" y2="15" stroke="#888" stroke-width="2" stroke-dasharray="4,3"/>
+            <line x1="70" y1="65" x2="85" y2="105" stroke="#888" stroke-width="2" stroke-dasharray="4,3"/>
+        </svg>
+        <div class="nom">Imagen B</div>
+        <p style="font-size:.8em;">Tipo: ______</p>
+    </div>
+    <div class="galeria-item">
+        <svg viewBox="0 0 110 110" width="100" height="100">
+            <line x1="20" y1="3" x2="20" y2="30" stroke="#333" stroke-width="2"/>
+            <line x1="90" y1="3" x2="90" y2="30" stroke="#333" stroke-width="2"/>
+            <polygon points="15,3 25,3 20,-2" fill="#333"/>
+            <polygon points="85,3 95,3 90,-2" fill="#333"/>
+            <circle cx="20" cy="25" r="12" fill="none" stroke="#0f3460" stroke-width="2.5"/>
+            <circle cx="90" cy="25" r="12" fill="none" stroke="#0f3460" stroke-width="2.5"/>
+            <circle cx="20" cy="25" r="3" fill="#e94560"/>
+            <circle cx="90" cy="25" r="3" fill="#e94560"/>
+            <circle cx="55" cy="70" r="12" fill="none" stroke="#0f3460" stroke-width="2.5"/>
+            <circle cx="55" cy="70" r="3" fill="#e94560"/>
+            <line x1="55" y1="82" x2="55" y2="97" stroke="#333" stroke-width="2.5"/>
+            <rect x="46" y="94" width="18" height="12" rx="2" fill="#888"/>
+            <path d="M 12 37 Q 55 102 98 37" fill="none" stroke="#888" stroke-width="1.8" stroke-dasharray="4,3"/>
+            <path d="M 28 37 Q 55 88 82 37" fill="none" stroke="#888" stroke-width="1.8" stroke-dasharray="4,3"/>
+        </svg>
+        <div class="nom">Imagen C</div>
+        <p style="font-size:.8em;">Tipo: ______</p>
+    </div>
+    <div class="galeria-item">
+        <svg viewBox="0 0 100 80" width="90" height="70">
+            <circle cx="22" cy="40" r="15" fill="none" stroke="#0f3460" stroke-width="2.5"/>
+            <circle cx="78" cy="40" r="15" fill="none" stroke="#0f3460" stroke-width="2.5"/>
+            <circle cx="22" cy="40" r="3" fill="#e94560"/>
+            <circle cx="78" cy="40" r="3" fill="#e94560"/>
+            <line x1="37" y1="35" x2="63" y2="35" stroke="#555" stroke-width="2"/>
+            <line x1="37" y1="45" x2="63" y2="45" stroke="#555" stroke-width="2"/>
+            <line x1="37" y1="35" x2="37" y2="45" stroke="#555" stroke-width="1.5"/>
+            <line x1="63" y1="35" x2="63" y2="45" stroke="#555" stroke-width="1.5"/>
+            <text x="22" y="68" text-anchor="middle" font-size="6" fill="#666">D₁</text>
+            <text x="78" y="68" text-anchor="middle" font-size="6" fill="#666">D₂</text>
+        </svg>
+        <div class="nom">Imagen D</div>
+        <p style="font-size:.8em;">Tipo: ______</p>
+    </div>
+</div>
+
+<div class="ejercicio">
+    <p><span class="num-ej">Ejercicio 1.</span> Relaciona cada imagen de arriba con su nombre:</p>
+    <p>Imagen A → _______ &nbsp;|&nbsp; Imagen B → _______ &nbsp;|&nbsp; Imagen C → _______ &nbsp;|&nbsp; Imagen D → _______</p>
+</div>
+
+<div class="ejercicio">
+    <p><span class="num-ej">Ejercicio 2.</span> Escribe 2 ejemplos de la vida real donde se use cada tipo de polea:</p>
+    <p>a) Polea fija: ____________ y ____________<br>
+       b) Polea móvil: ____________ y ____________<br>
+       c) Polipasto: ____________ y ____________<br>
+       d) Poleas con correa: ____________ y ____________</p>
+</div>
+
+<div class="ejercicio">
+    <p><span class="num-ej">Ejercicio 3.</span> Observa el dibujo de la polea fija. Si el cubo pesa <strong>40 kg</strong>:</p>
+    <p>a) ¿Qué fuerza debe hacer la persona? ______<br>
+       b) ¿Cuál es la VM? ______<br>
+       c) Si la polea fuera móvil, ¿qué fuerza necesitaría? ______</p>
+    <div style="text-align:center;margin:8px 0;">
+        <svg viewBox="0 0 120 130" width="80" height="90" style="display:inline-block;">
+            <circle cx="60" cy="35" r="20" fill="none" stroke="#0f3460" stroke-width="3"/>
+            <circle cx="60" cy="35" r="4" fill="#e94560"/>
+            <line x1="60" y1="15" x2="60" y2="5" stroke="#333" stroke-width="2.5"/>
+            <rect x="53" y="2" width="14" height="5" rx="2" fill="#555"/>
+            <line x1="42" y1="50" x2="25" y2="125" stroke="#888" stroke-width="2" stroke-dasharray="4,3"/>
+            <line x1="78" y1="50" x2="95" y2="125" stroke="#888" stroke-width="2" stroke-dasharray="4,3"/>
+            <rect x="22" y="122" width="8" height="5" rx="1" fill="#555"/>
+            <rect x="92" y="122" width="8" height="5" rx="1" fill="#555"/>
+            <text x="60" y="115" text-anchor="middle" font-size="8" fill="#e94560">40 kg</text>
+        </svg>
+    </div>
+</div>
+
+<div class="ejercicio">
+    <p><span class="num-ej">Ejercicio 4. Completa la tabla de poleas</span></p>
+    <table>
+        <tr><th>Tipo</th><th>Fórmula</th><th>VM</th><th>F para R = 800 N</th></tr>
+        <tr><td>Polea fija</td><td>F = R</td><td>___</td><td>___ N</td></tr>
+        <tr><td>Polea móvil</td><td>F = ___</td><td>2</td><td>___ N</td></tr>
+        <tr><td>Polipasto (2 móviles)</td><td>F = ___</td><td>4</td><td>___ N</td></tr>
+        <tr><td>Polipasto (4 móviles)</td><td>F = R/(2×4)</td><td>___</td><td>___ N</td></tr>
+    </table>
+</div>
+
+<div class="ejercicio">
+    <p><span class="num-ej">Ejercicio 5. ¡Relaciona con flechas!</span></p>
+    <p>Conecta cada polea con el lugar donde se usa:</p>
+    <div style="display:flex;justify-content:space-between;flex-wrap:wrap;">
+        <div><strong>POLEA:</strong><br>1. Polea fija →<br>2. Polea móvil →<br>3. Polipasto →<br>4. Poleas con correa →</div>
+        <div><strong>SE USA EN:</strong><br>A. Motor de un carro<br>B. Izar la bandera<br>C. Grúa de construcción<br>D. Elevar un motor en taller</div>
+    </div>
+    <p style="margin-top:5px;">Respuesta: 1-__ &nbsp; 2-__ &nbsp; 3-__ &nbsp; 4-__</p>
+</div>
+
+<!-- ===== ACTIVIDAD 2: IDENTIFICAR PALANCAS ===== -->
+<h3>📍 ACTIVIDAD 2: ¿Qué tipo de palanca es?</h3>
+<p>Observa las imágenes y escribe si son <strong>1er, 2do o 3er grado</strong>. Identifica fulcro (▲), potencia (P) y resistencia (R).</p>
+
+<div class="id-grid" style="grid-template-columns:repeat(3,1fr);">
+    <div class="id-card">
+        <svg viewBox="0 0 130 60" width="120" height="55">
+            <line x1="10" y1="45" x2="65" y2="10" stroke="#8B4513" stroke-width="5"/>
+            <line x1="65" y1="10" x2="120" y2="45" stroke="#8B4513" stroke-width="5"/>
+            <circle cx="65" cy="10" r="4" fill="#0f3460"/>
+            <text x="65" y="24" text-anchor="middle" font-size="7">▲</text>
+            <text x="30" y="38" font-size="8" fill="#e94560">P</text>
+            <text x="100" y="38" font-size="8" fill="#d4a017">R</text>
+        </svg>
+        <h5>⚖️ Balancín</h5>
+        <p style="font-size:.8em;">Tipo: ______</p>
+    </div>
+    <div class="id-card">
+        <svg viewBox="0 0 130 60" width="120" height="55">
+            <line x1="5" y1="50" x2="125" y2="10" stroke="#8B4513" stroke-width="5"/>
+            <circle cx="15" cy="45" r="6" fill="none" stroke="#0f3460" stroke-width="2"/>
+            <circle cx="15" cy="45" r="2.5" fill="#e94560"/>
+            <text x="15" y="38" text-anchor="middle" font-size="6">▲</text>
+            <text x="55" y="30" font-size="8" fill="#d4a017">R</text>
+            <text x="105" y="18" font-size="8" fill="#e94560">P</text>
+        </svg>
+        <h5>🛒 Carretilla</h5>
+        <p style="font-size:.8em;">Tipo: ______</p>
+    </div>
+    <div class="id-card">
+        <svg viewBox="0 0 130 60" width="120" height="55">
+            <line x1="5" y1="50" x2="125" y2="5" stroke="#8B4513" stroke-width="4"/>
+            <circle cx="10" cy="48" r="3.5" fill="#0f3460"/>
+            <text x="10" y="42" text-anchor="end" font-size="6">▲</text>
+            <text x="50" y="32" font-size="8" fill="#e94560">P</text>
+            <text x="110" y="12" font-size="8" fill="#d4a017">R</text>
+        </svg>
+        <h5>🎣 Caña de pescar</h5>
+        <p style="font-size:.8em;">Tipo: ______</p>
+    </div>
+    <div class="id-card">
+        <svg viewBox="0 0 130 60" width="120" height="55">
+            <line x1="5" y1="45" x2="65" y2="10" stroke="#8B4513" stroke-width="5"/>
+            <line x1="65" y1="10" x2="125" y2="45" stroke="#8B4513" stroke-width="5"/>
+            <circle cx="65" cy="10" r="4" fill="#0f3460"/>
+            <text x="65" y="24" text-anchor="middle" font-size="7">▲</text>
+            <text x="100" y="38" font-size="8" fill="#e94560">P</text>
+            <text x="30" y="38" font-size="8" fill="#d4a017">R</text>
+        </svg>
+        <h5>🔧 Alicates</h5>
+        <p style="font-size:.8em;">Tipo: ______</p>
+    </div>
+    <div class="id-card">
+        <svg viewBox="0 0 130 60" width="120" height="55">
+            <line x1="5" y1="50" x2="125" y2="10" stroke="#8B4513" stroke-width="5"/>
+            <circle cx="15" cy="45" r="6" fill="none" stroke="#0f3460" stroke-width="2"/>
+            <circle cx="15" cy="45" r="2.5" fill="#e94560"/>
+            <text x="15" y="38" text-anchor="middle" font-size="6">▲</text>
+            <text x="55" y="30" font-size="8" fill="#d4a017">R</text>
+            <text x="105" y="18" font-size="8" fill="#e94560">P</text>
+        </svg>
+        <h5>🥜 Cascanueces</h5>
+        <p style="font-size:.8em;">Tipo: ______</p>
+    </div>
+    <div class="id-card">
+        <svg viewBox="0 0 130 60" width="120" height="55">
+            <line x1="5" y1="50" x2="125" y2="5" stroke="#8B4513" stroke-width="4"/>
+            <circle cx="10" cy="48" r="3.5" fill="#0f3460"/>
+            <text x="10" y="42" text-anchor="end" font-size="6">▲</text>
+            <text x="50" y="32" font-size="8" fill="#e94560">P</text>
+            <text x="110" y="12" font-size="8" fill="#d4a017">R</text>
+        </svg>
+        <h5>🧹 Escoba</h5>
+        <p style="font-size:.8em;">Tipo: ______</p>
+    </div>
+</div>
+
+<div class="ejercicio">
+    <p><span class="num-ej">Ejercicio 6. ¡Identifica las 9 palancas!</span></p>
+    <p>Escribe el tipo de cada objeto (1er, 2do o 3er grado):</p>
+    <p>a) Tijeras → ___ &nbsp; b) Carretilla → ___ &nbsp; c) Caña de pescar → ___<br>
+       d) Balancín → ___ &nbsp; e) Cascanueces → ___ &nbsp; f) Alicates → ___<br>
+       g) Escoba → ___ &nbsp; h) Abrebotellas → ___ &nbsp; i) Brazo humano → ___</p>
+</div>
+
+<div class="ejercicio">
+    <p><span class="num-ej">Ejercicio 7. Encuentra las palancas en tu casa</span></p>
+    <p>Busca 5 objetos en tu casa que funcionen como palanca. Dibújalos y escribe de qué grado son:</p>
+    <p>1. ___________ → ___ grado &nbsp; 2. ___________ → ___ grado &nbsp; 3. ___________ → ___ grado<br>
+       4. ___________ → ___ grado &nbsp; 5. ___________ → ___ grado</p>
+</div>
+
+<div class="ejercicio">
+    <p><span class="num-ej">Ejercicio 8. Calcula con la ley de la palanca</span></p>
+    <p>Un balancín tiene un niño de <strong>35 kg</strong> sentado a <strong>1.8 m</strong> del fulcro. ¿A qué distancia debe sentarse otro niño de <strong>42 kg</strong> para equilibrarlo?</p>
+    <span class="pista">💡 P₁ × Bp₁ = P₂ × Bp₂</span>
+</div>
+
+<div class="ejercicio">
+    <p><span class="num-ej">Ejercicio 9. La carretilla</span></p>
+    <p>Llevas <strong>120 kg</strong> de arena en una carretilla a <strong>35 cm</strong> de la rueda (fulcro). Los mangos están a <strong>140 cm</strong> de la rueda. ¿Qué fuerza debes hacer?</p>
+    <span class="pista">💡 Es palanca de 2do grado: P × 140 = 120 × 35</span>
+</div>
+
+<div class="ejercicio">
+    <p><span class="num-ej">Ejercicio 10. La caña de pescar</span></p>
+    <p>Una caña de <strong>3.2 m</strong> tiene el fulcro en el extremo. Tomas la caña a <strong>40 cm</strong> del fulcro. El pez pesa <strong>2 kg</strong>. ¿Qué fuerza hace tu brazo?</p>
+    <span class="pista">💡 Br = 3.2 - 0.4 = 2.8 m. P × 0.4 = 2 × 2.8</span>
+</div>
+
+<!-- ===== ACTIVIDAD 3: IDENTIFICAR ENGRANAJES ===== -->
+<h3>📍 ACTIVIDAD 3: ¿Qué tipo de engranaje es?</h3>
+<p>Observa las imágenes y escribe el tipo de engranaje: <strong>recto, helicoidal, cónico, tornillo sin fin o piñón-cremallera</strong>.</p>
+
+<div class="galeria" style="grid-template-columns:repeat(5,1fr);">
+    <div class="galeria-item">
+        <svg viewBox="0 0 80 60" width="70" height="55">
+            <defs><g id="e1"><circle cx="0" cy="0" r="12" fill="none" stroke="#0f3460" stroke-width="2"/><circle cx="0" cy="0" r="3" fill="#e94560"/><g fill="#0f3460"><rect x="-1.5" y="-15" width="3" height="5" rx=".5"/><rect x="-1.5" y="10" width="3" height="5" rx=".5"/><rect x="-15" y="-1.5" width="5" height="3" rx=".5"/><rect x="10" y="-1.5" width="5" height="3" rx=".5"/><rect x="8.5" y="-10" width="3" height="5" rx=".5" transform="rotate(45)"/><rect x="-11.5" y="5" width="3" height="5" rx=".5" transform="rotate(45)"/><rect x="-11.5" y="-10" width="3" height="5" rx=".5" transform="rotate(-45)"/><rect x="8.5" y="5" width="3" height="5" rx=".5" transform="rotate(-45)"/></g></g></defs>
+            <use href="#e1" x="22" y="30"/><use href="#e1" x="58" y="30"/>
+        </svg>
+        <p style="font-size:.75em;">Tipo: ______</p>
+    </div>
+    <div class="galeria-item">
+        <svg viewBox="0 0 80 60" width="70" height="55">
+            <defs><g id="e2"><circle cx="0" cy="0" r="12" fill="none" stroke="#0f3460" stroke-width="2"/><circle cx="0" cy="0" r="3" fill="#e94560"/><g fill="#0f3460"><rect x="-1.5" y="-15" width="3" height="5" rx=".5" transform="rotate(12)"/><rect x="-1.5" y="10" width="3" height="5" rx=".5" transform="rotate(12)"/><rect x="-15" y="-1.5" width="5" height="3" rx=".5" transform="rotate(12)"/><rect x="10" y="-1.5" width="5" height="3" rx=".5" transform="rotate(12)"/><rect x="8.5" y="-10" width="3" height="5" rx=".5" transform="rotate(57)"/><rect x="-11.5" y="5" width="3" height="5" rx=".5" transform="rotate(57)"/><rect x="-11.5" y="-10" width="3" height="5" rx=".5" transform="rotate(-33)"/><rect x="8.5" y="5" width="3" height="5" rx=".5" transform="rotate(-33)"/></g></g></defs>
+            <use href="#e2" x="22" y="30"/><use href="#e2" x="58" y="30"/>
+        </svg>
+        <p style="font-size:.75em;">Tipo: ______</p>
+    </div>
+    <div class="galeria-item">
+        <svg viewBox="0 0 80 60" width="70" height="55">
+            <defs><g id="e3"><circle cx="0" cy="0" r="12" fill="none" stroke="#0f3460" stroke-width="2"/><circle cx="0" cy="0" r="3" fill="#e94560"/><g fill="#0f3460"><rect x="-1.5" y="-15" width="3" height="5" rx=".5"/><rect x="-1.5" y="10" width="3" height="5" rx=".5"/><rect x="-15" y="-1.5" width="5" height="3" rx=".5"/><rect x="10" y="-1.5" width="5" height="3" rx=".5"/><rect x="8.5" y="-10" width="3" height="5" rx=".5" transform="rotate(45)"/><rect x="-11.5" y="5" width="3" height="5" rx=".5" transform="rotate(45)"/><rect x="-11.5" y="-10" width="3" height="5" rx=".5" transform="rotate(-45)"/><rect x="8.5" y="5" width="3" height="5" rx=".5" transform="rotate(-45)"/></g></g></defs>
+            <use href="#e3" x="25" y="38" transform="rotate(20,25,38)"/><use href="#e3" x="65" y="22" transform="rotate(-30,65,22)"/>
+        </svg>
+        <p style="font-size:.75em;">Tipo: ______</p>
+    </div>
+    <div class="galeria-item">
+        <svg viewBox="0 0 80 60" width="70" height="55">
+            <rect x="3" y="25" width="35" height="8" rx="2" fill="#0f3460"/>
+            <text x="20" y="20" text-anchor="middle" font-size="6" fill="#0f3460">TORNILLO</text>
+            <circle cx="60" cy="30" r="13" fill="none" stroke="#0f3460" stroke-width="2.5"/>
+            <circle cx="60" cy="30" r="3" fill="#e94560"/>
+        </svg>
+        <p style="font-size:.75em;">Tipo: ______</p>
+    </div>
+    <div class="galeria-item">
+        <svg viewBox="0 0 80 60" width="70" height="55">
+            <circle cx="20" cy="30" r="12" fill="none" stroke="#0f3460" stroke-width="2.5"/>
+            <circle cx="20" cy="30" r="3" fill="#e94560"/>
+            <rect x="35" y="20" width="35" height="6" rx="1" fill="#0f3460"/>
+            <line x1="35" y1="23" x2="70" y2="23" stroke="#ddd" stroke-width=".8"/>
+            <line x1="35" y1="25" x2="70" y2="25" stroke="#ddd" stroke-width=".8"/>
+            <text x="55" y="40" text-anchor="middle" font-size="5" fill="#0f3460">CREMALLERA</text>
+        </svg>
+        <p style="font-size:.75em;">Tipo: ______</p>
+    </div>
+</div>
+
+<div class="ejercicio">
+    <p><span class="num-ej">Ejercicio 11.</span> Escribe el nombre de cada engranaje de las imágenes de arriba:</p>
+    <p>a) ______ &nbsp; b) ______ &nbsp; c) ______ &nbsp; d) ______ &nbsp; e) ______</p>
+</div>
+
+<div class="ejercicio">
+    <p><span class="num-ej">Ejercicio 12.</span> Para cada tipo de engranaje, escribe 1 lugar donde se use:</p>
+    <p>a) Recto → ____________<br>b) Helicoidal → ____________<br>c) Cónico → ____________<br>d) Tornillo sin fin → ____________<br>e) Piñón-cremallera → ____________</p>
+</div>
+
+<div class="ejercicio">
+    <p><span class="num-ej">Ejercicio 13. Calcula la velocidad</span></p>
+    <p>Un engranaje de <strong>25 dientes</strong> gira a <strong>1200 rpm</strong> y está conectado a otro de <strong>50 dientes</strong>.</p>
+    <p>a) N₂ = (N₁ × Z₁) / Z₂ = (1200 × 25) / 50 = ______ rpm<br>b) RT = Z₁ / Z₂ = ______ <br>c) ¿Es reductor o multiplicador? ______</p>
+</div>
+
+<div class="ejercicio">
+    <p><span class="num-ej">Ejercicio 14. La bicicleta</span></p>
+    <p>Plato = <strong>48 dientes</strong>, Piñón = <strong>12 dientes</strong>. Pedaleas a <strong>50 rpm</strong>.</p>
+    <p>a) RT = 48/12 = ______<br>b) La rueda gira a N₂ = (50 × 48) / 12 = ______ rpm<br>c) Si cambias a un piñón de 24 dientes, ¿pedaleas más fácil o más difícil? ______</p>
+</div>
+
+<!-- ===== ACTIVIDAD 4: CLASIFICACIÓN FINAL ===== -->
+<h3>📍 ACTIVIDAD 4: ¿Qué mecanismo tiene cada máquina?</h3>
+
+<div class="ejercicio">
+    <p><span class="num-ej">Ejercicio 15. Marca con ✓ qué mecanismos tiene cada máquina</span></p>
+    <table>
+        <tr><th>Máquina</th><th>Polea</th><th>Palanca</th><th>Engranaje</th></tr>
+        <tr><td>Bicicleta</td><td></td><td>✓ (pedales)</td><td>✓ (plato-piñón)</td></tr>
+        <tr><td>Grúa</td><td></td><td></td><td></td></tr>
+        <tr><td>Tijeras</td><td></td><td></td><td></td></tr>
+        <tr><td>Carretilla</td><td></td><td></td><td></td></tr>
+        <tr><td>Ascensor</td><td></td><td></td><td></td></tr>
+        <tr><td>Taladro</td><td></td><td></td><td></td></tr>
+        <tr><td>Reloj</td><td></td><td></td><td></td></tr>
+        <tr><td>Máquina de coser</td><td></td><td></td><td></td></tr>
+    </table>
+</div>
+
+<div class="ejercicio">
+    <p><span class="num-ej">Ejercicio 16. Inventa tu máquina compuesta</span></p>
+    <p>Dibuja y explica una máquina que combine al menos <strong>2 mecanismos</strong> (polea, palanca y/o engranaje). ¿Qué tarea hace?</p>
+    <p>Nombre de mi máquina: ________________________________<br>
+       Mecanismos que usa: ________________________________<br>
+       ¿Para qué sirve?: ________________________________</p>
+</div>
+
+</div><!-- /tab-taller -->
+
+<!-- ===================== TAB 3: EVALUACION ===================== -->
+<div class="tab-content" id="tab-evaluacion">
+
+<h2>📝 EVALUACIÓN TIPO ICFES</h2>
+<p><strong>20 preguntas de selección múltiple.</strong> Observa las imágenes, lee cada pregunta y marca la opción correcta.</p>
+<p class="contador" id="contadorEval">0 de 20 respondidas</p>
+<div id="preguntasEval"></div>
+<div class="resultado" id="resultadoEval">
+    <h2>📊 RESULTADO</h2>
+    <div class="nota" id="notaEval">0.0</div>
+    <p id="detalleEval"></p>
+    <p id="mensajeEval" style="font-size:1.1em;margin-top:8px;"></p>
+</div>
+<div class="no-print" style="text-align:center;margin-top:15px;">
+    <button class="btn btn-success" onclick="calificarEval()">✅ Calificar</button>
+    <button class="btn btn-danger" onclick="reiniciarEval()">🔄 Reiniciar</button>
+</div>
+</div>
+
+</div><!-- /container -->
+
+<script>
+// TABS
+function abrirTab(n) {
+    document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('activo'));
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('activo'));
+    document.getElementById('tab-'+n).classList.add('activo');
+    document.querySelector(`[onclick*="'${n}'"]`).classList.add('activo');
+}
+
+// NOMBRE
+document.addEventListener('DOMContentLoaded',function(){
+    const ni=document.getElementById('nombreEst'), ci=document.getElementById('cursoEst');
+    if(ni) ni.addEventListener('input',function(){ document.getElementById('tallerNombre').textContent=this.value||'______________'; });
+    if(ci) ci.addEventListener('input',function(){ document.getElementById('tallerCurso').textContent=this.value||'______________'; });
+    initEval();
+});
+
+// ===== EVALUACION =====
+const banco = [
+{q:"¿Qué tipo de polea ves en la imagen?",img:`<svg viewBox="0 0 80 90" width="70" height="80"><circle cx="40" cy="30" r="18" fill="none" stroke="#0f3460" stroke-width="3"/><circle cx="40" cy="30" r="3" fill="#e94560"/><line x1="40" y1="12" x2="40" y2="3" stroke="#333" stroke-width="2"/><polygon points="35,3 45,3 40,0" fill="#333"/><line x1="24" y1="44" x2="15" y2="80" stroke="#888" stroke-width="2"/><line x1="56" y1="44" x2="65" y2="80" stroke="#888" stroke-width="2"/><rect x="12" y="78" width="6" height="5" rx="1" fill="#555"/><rect x="63" y="78" width="6" height="5" rx="1" fill="#555"/></svg>`,opts:["Polea móvil","Polea fija","Polipasto","Polea con correa"],ans:1},
+{q:"Observa la imagen. ¿De qué grado es esta palanca?",img:`<svg viewBox="0 0 130 60" width="120" height="55"><line x1="10" y1="45" x2="65" y2="10" stroke="#8B4513" stroke-width="5"/><line x1="65" y1="10" x2="120" y2="45" stroke="#8B4513" stroke-width="5"/><circle cx="65" cy="10" r="4" fill="#0f3460"/><text x="65" y="22" text-anchor="middle" font-size="7">▲</text><text x="30" y="38" font-size="9" fill="#e94560">P</text><text x="100" y="38" font-size="9" fill="#d4a017">R</text></svg>`,opts:["Primer grado","Segundo grado","Tercer grado","No es palanca"],ans:0},
+{q:"Un engranaje de 20 dientes a 600 rpm acoplado a uno de 40 dientes. ¿Velocidad del segundo?",opts:["1200 rpm","600 rpm","300 rpm","150 rpm"],ans:2},
+{q:"¿Qué ventaja tiene usar una polea fija?",img:`<svg viewBox="0 0 80 80" width="65" height="70"><circle cx="40" cy="25" r="15" fill="none" stroke="#0f3460" stroke-width="2.5"/><circle cx="40" cy="25" r="3" fill="#e94560"/><line x1="40" y1="10" x2="40" y2="2" stroke="#333" stroke-width="2"/><polygon points="36,2 44,2 40,-1" fill="#333"/><line x1="27" y1="36" x2="15" y2="72" stroke="#888" stroke-width="2"/><line x1="53" y1="36" x2="65" y2="72" stroke="#888" stroke-width="2"/></svg>`,opts:["Reduce la fuerza a la mitad","Cambia la dirección de la fuerza","Multiplica la fuerza","Elimina la resistencia"],ans:1},
+{q:"Las tijeras y alicates son palanca de:",opts:["Primer grado","Segundo grado","Tercer grado","No son palancas"],ans:0},
+{q:"¿Qué engranaje se usa para ejes que se cruzan a 90°?",img:`<svg viewBox="0 0 80 50" width="70" height="45"><circle cx="22" cy="32" r="10" fill="none" stroke="#0f3460" stroke-width="2"/><circle cx="22" cy="32" r="2.5" fill="#e94560"/><circle cx="60" cy="20" r="10" fill="none" stroke="#0f3460" stroke-width="2"/><circle cx="60" cy="20" r="2.5" fill="#e94560"/></svg>`,opts:["Recto","Helicoidal","Cónico","Cremallera"],ans:2},
+{q:"En una polea móvil, ¿cuántos segmentos de cuerda soportan la carga?",img:`<svg viewBox="0 0 60 80" width="55" height="75"><circle cx="30" cy="40" r="14" fill="none" stroke="#0f3460" stroke-width="2.5"/><circle cx="30" cy="40" r="2.5" fill="#e94560"/><line x1="30" y1="54" x2="30" y2="70" stroke="#333" stroke-width="2"/><rect x="24" y="68" width="12" height="8" rx="1" fill="#888"/><line x1="18" y1="40" x2="5" y2="10" stroke="#888" stroke-width="2" stroke-dasharray="3,2"/><line x1="42" y1="40" x2="55" y2="78" stroke="#888" stroke-width="2" stroke-dasharray="3,2"/></svg>`,opts:["1","2","3","4"],ans:1},
+{q:"¿Cuál NO es palanca de segundo grado?",opts:["Carretilla","Cascanueces","Caña de pescar","Abridor de botellas"],ans:2},
+{q:"Polipasto potencial con 3 móviles: la fuerza es:",opts:["F=R/3","F=R/6","F=R/8","F=R/9"],ans:1},
+{q:"¿Qué mecanismo convierte movimiento circular en lineal?",img:`<svg viewBox="0 0 80 50" width="70" height="45"><circle cx="18" cy="25" r="10" fill="none" stroke="#0f3460" stroke-width="2"/><circle cx="18" cy="25" r="2.5" fill="#e94560"/><rect x="30" y="18" width="35" height="5" rx="1" fill="#0f3460"/></svg>`,opts:["Polea fija","Polipasto","Piñón-cremallera","Polea móvil"],ans:2},
+{q:"La escoba al barrer es palanca de:",opts:["Primer grado","Segundo grado","Tercer grado","No es palanca"],ans:2},
+{q:"N₁×Z₁=N₂×Z₂. Si Z₁ > Z₂, entonces N₂ es:",opts:["Menor que N₁","Igual a N₁","Mayor que N₁","No se puede"],ans:2},
+{q:"VM de un polipasto 2F+2M:",opts:["2","3","4","6"],ans:2},
+{q:"¿Qué engranaje es más silencioso que el recto?",img:`<svg viewBox="0 0 80 40" width="70" height="35"><circle cx="20" cy="20" r="10" fill="none" stroke="#0f3460" stroke-width="2"/><circle cx="60" cy="20" r="10" fill="none" stroke="#0f3460" stroke-width="2"/></svg>`,opts:["Cónico recto","Helicoidal","Cremallera","Tornillo sin fin"],ans:1},
+{q:"Carga 100 kg, palanca 1er grado, Br=25cm, Bp=100cm. ¿Fuerza?",opts:["50 kg","25 kg","10 kg","100 kg"],ans:1},
+{q:"RT si Z₁=15 y Z₂=45:",opts:["3","1/3","30","60"],ans:1},
+{q:"¿Cuál NO es máquina simple?",opts:["Polea","Palanca","Motor eléctrico","Plano inclinado"],ans:2},
+{q:"¿Qué conecta el plato y el piñón en una bicicleta?",img:`<svg viewBox="0 0 100 50" width="90" height="45"><circle cx="25" cy="25" r="14" fill="none" stroke="#0f3460" stroke-width="2"/><circle cx="75" cy="25" r="9" fill="none" stroke="#0f3460" stroke-width="2"/><line x1="39" y1="18" x2="66" y2="16" stroke="#555" stroke-width="2"/><line x1="39" y1="32" x2="66" y2="34" stroke="#555" stroke-width="2"/><line x1="39" y1="18" x2="39" y2="32" stroke="#555" stroke-width="1"/><line x1="66" y1="16" x2="66" y2="34" stroke="#555" stroke-width="1"/></svg>`,opts:["Correa","Cadena","Engranaje directo","Polea"],ans:1},
+{q:"¿Qué sistema usarías para levantar la carga más pesada con menos fuerza?",opts:["Polea fija","Polea móvil","Polipasto con muchas poleas","Polea con correa"],ans:2},
+{q:"¿Qué tipo de engranaje tiene dientes inclinados?",img:`<svg viewBox="0 0 80 40" width="70" height="35"><circle cx="22" cy="20" r="10" fill="none" stroke="#0f3460" stroke-width="2"/><circle cx="58" cy="20" r="10" fill="none" stroke="#0f3460" stroke-width="2"/><line x1="22" cy="20" x2="58" y2="20" stroke="#0f3460" stroke-width="1.5" stroke-dasharray="3,2"/></svg>`,opts:["Cónico","Helicoidal","Recto doble","Cremallera"],ans:1},
+{q:"Bp en palanca 1er grado de 2m si fulcro está a 0.5m de la resistencia:",opts:["0.5m","1m","1.5m","2m"],ans:2},
+{q:"¿Para qué sirve un engranaje loco intermedio?",opts:["Aumenta velocidad","Cambia al mismo sentido","Reduce fuerza","Duplica RT"],ans:1},
+{q:"¿Cuál usa sistema de poleas?",opts:["Bicicleta","Ascensor","Automóvil","Patines"],ans:1},
+{q:"Si en palanca de 2do grado R está a 20cm y P a 100cm, la VM es:",opts:["2","3","5","10"],ans:2},
+{q:"¿Qué mecanismo usa la izada de bandera?",opts:["Palanca 1er grado","Polea fija","Engranaje recto","Polipasto"],ans:1},
+{q:"¿Qué pasa al conectar dos engranajes rectos?",opts:["Mismo sentido","Sentido contrario","Uno se detiene","Duplica velocidad"],ans:1},
+{q:"¿El brazo humano al levantar algo es palanca de?",opts:["1er grado","2do grado","3er grado","No es palanca"],ans:2},
+{q:"¿Qué máquina combina poleas, palancas y engranajes?",opts:["Tijeras","Carretilla","Grúa moderna","Balancín"],ans:2},
+{q:"¿Qué mecanismo NO ahorra fuerza, solo cambia dirección?",opts:["Polea móvil","Polipasto","Polea fija","Engranaje reductor"],ans:2},
+];
+
+let preguntas=[], respuestas=[];
+function shuffleArray(a){for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+function initEval(){
+    const s=shuffleArray([...banco]);
+    preguntas=s.slice(0,20);
+    respuestas=new Array(20).fill(null);
+    const c=document.getElementById('preguntasEval');
+    c.innerHTML='';
+    const l=['A','B','C','D'];
+    preguntas.forEach((p,i)=>{
+        const d=document.createElement('div'); d.className='pregunta'; d.id='pe-'+i;
+        let img=p.img?`<div style="text-align:center;margin-bottom:6px;">${p.img}</div>`:'';
+        let opts='<div class="opts">';
+        p.opts.forEach((o,oi)=>{opts+=`<div><input type="radio" name="e${i}" value="${oi}" id="e${i}-${oi}" onchange="marcarE(${i},${oi})"><label for="e${i}-${oi}"><strong>${l[oi]}.</strong> ${o}</label></div>`;});
+        opts+='</div>';
+        d.innerHTML=`${img}<div class="qtext">${i+1}. ${p.q}</div>${opts}<div class="respuesta-eval" id="re-${i}"></div>`;
+        c.appendChild(d);
+    });
+    document.getElementById('contadorEval').textContent='0 de 20 respondidas';
+    document.getElementById('resultadoEval').classList.remove('mostrar');
+}
+function marcarE(i,v){respuestas[i]=v;const r=respuestas.filter(x=>x!==null).length;document.getElementById('contadorEval').textContent=r+' de 20 respondidas';}
+function calificarEval(){
+    let c=0;const l=['A','B','C','D'];
+    preguntas.forEach((p,i)=>{
+        const card=document.getElementById('pe-'+i), rd=document.getElementById('re-'+i);
+        const radios=card.querySelectorAll('input[type="radio"]');
+        radios.forEach((r,oi)=>{r.disabled=true;const lb=r.nextElementSibling;if(oi===p.ans){lb.style.color='#28a745';lb.style.fontWeight='bold';}if(respuestas[i]!==null&&respuestas[i]!==p.ans&&oi===respuestas[i]){lb.style.color='#dc3545';lb.style.fontWeight='bold';}});
+        const ic=respuestas[i]===p.ans?'✅':'❌';
+        rd.style.display='block';rd.innerHTML=`${ic} <b>Resp:</b> ${l[p.ans]}. ${p.opts[p.ans]}`;
+        if(respuestas[i]===p.ans){c++;rd.style.background='#d4edda';rd.style.color='#155724';}else{rd.style.background='#f8d7da';rd.style.color='#721c24';}
+    });
+    const n=(c/preguntas.length)*5,e=document.getElementById('notaEval');
+    e.textContent=n.toFixed(1);e.className='nota '+(n>=3.0?'aprobado':'reprobado');
+    document.getElementById('detalleEval').innerHTML=`✅ ${c}/${preguntas.length} correctas | ❌ ${preguntas.length-c} incorrectas`;
+    document.getElementById('mensajeEval').textContent=n>=4.5?'🌟 Excelente!':n>=3.0?'👍 Bien, repasa lo malo.':'📚 Repasa la guía e intenta de nuevo.';
+document.getElementById('resultadoEval').classList.add('mostrar');
+}
+function reiniciarEval(){initEval();}
+</script>
+</body>
+</html>
