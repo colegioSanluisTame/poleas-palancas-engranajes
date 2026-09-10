@@ -1,0 +1,155 @@
+BANCO DE PREGUNTAS: EVALUACIÓN DE DELITOS INFORMATICOS (20 PREGUNTAS)
+
+INSTRUCCIONES PARA EL ESTUDIANTE:
+- Responde las 20 preguntas de opción múltiple.
+- Solo tiene una respuesta correcta.
+- Puedes resolver la evaluación dos veces, pero las preguntas serán aleatorias.
+- Marca la letra de tu respuesta correcta.
+
+PREGUNTA 1
+¿Qué es el phishing?
+A) Un tipo de software que daña el sistema
+B) Engañar a personas para obtener información confidencial haciéndose pasar por entidades de confianza
+C) Un ataque que bloquea los archivos del sistema
+D) El robo físico de una computadora
+
+PREGUNTA 2
+¿Cuál de las siguientes es una característica de los delitos informáticos?
+A) Solo se cometen con computadoras muy antiguas
+B) Utilizan tecnología y causan daño a información o sistemas
+C) Solo afectan a empresas grandes
+D) No dejan rastros digitales
+
+PREGUNTA 3
+¿Cuál es una forma de proteger tus contraseñas?
+A) Usar la misma contraseña para todas las cuentas
+B) Usar contraseñas de al menos 8 caracteres con letras, números y símbolos
+C) Escribir tus contraseñas en un papel pegado al computador
+D) Compartir tus contraseñas con tus amigos
+
+PREGUNTA 4
+¿Qué debes hacer si recibes un correo electrónico sospechoso de un desconocido?
+A) Abrir los adjuntos para ver qué contiene
+B) Borrarlo inmediatamente sin abrirlo
+C) Responder para preguntar quién es
+D) Reenviarlo a todos tus contactos
+
+PREGUNTA 5
+¿Qué es el ransomware?
+A) Un virus que borra todos los archivos permanentemente
+B) Software que bloquea el acceso a archivos y exige pago para desbloquearlos
+C) Un tipo de firewall que protege el sistema
+D) Una forma de actualizar el sistema operativo
+
+PREGUNTA 6
+¿Cuál de estas acciones es un delito informático según la Ley 1273 de 2009 en Colombia?
+A) Acceder a un sistema informático sin autorización
+B) Apagar el computador al terminar de usarlo
+C) Guardar una copia de seguridad de tus archivos
+D) Comprar en línea en una página segura
+
+PREGUNTA 7
+¿Por qué es importante mantener actualizado el software y el antivirus?
+A) Para que el computador se vea nuevo
+B) Para corregir vulnerabilidades de seguridad que los delincuentes pueden explotar
+C) Para aumentar la velocidad de internet
+D) Para cambiar el diseño de las aplicaciones
+
+PREGUNTA 8
+¿Qué es la ingeniería social en el contexto de los delitos informáticos?
+A) Usar herramientas técnicas para hackear sistemas
+B) Manipular a las personas para obtener información confidencial explotando la confianza o curiosidad
+C) Estudiar la tecnología socialmente
+D) Crear redes sociales seguras
+
+PREGUNTA 9
+¿Cuál de estas es una medida de protección en redes sociales?
+A) Publicar tu ubicación en tiempo real
+B) Aceptar amistad de personas desconocidas
+C) Configurar tu perfil como privado
+D) Compartir tu número de teléfono públicamente
+
+PREGUNTA 10
+¿Qué debes verificar antes de ingresar datos en un sitio web para compras en línea?
+A) Que tenga diseño atractivo
+B) Que la URL comience con "https://" y sea la oficial
+C) Que tenga muchos colores y animaciones
+D) Que sea el primer resultado en el buscador
+
+PREGUNTA 11
+¿Cuál de estos delos consiste en suplantar sitios web para capturar datos personales?
+A) Phishing
+B) Ransomware
+C) Virus común
+D) Firewall
+
+PREGUNTA 12
+¿Qué hacer si soy víctima de un delito informático?
+A) Entrar en pánico y borrar todo
+B) Cambiar inmediatamente las contraseñas, guardar evidencia y reportar a las autoridades
+C) Culpar a otros sin investigar
+D) Ignorar el problema esperando que se vaya
+
+PREGUNTA 13
+¿Cuál es una forma de proteger la información personal en línea?
+A) Compartir documentos con número de identificación en redes públicas
+B) Nunca compartir número de documento, dirección o teléfono con desconocidos
+C) Usar el mismo perfil en todos los sitios web
+D) Aceptar todas las encuestas en línea
+
+PREGUNTA 14
+¿Qué tipo de delito informático implica dañar, borrar o alterar datos informáticos?
+A) Acceso abusivo
+B) Daño informático
+C) Interceptación de datos
+D) Uso de software malicioso
+
+PREGUNTA 15
+¿Cuál es el propósito principal de un firewall?
+A) Velocizar la conexión a internet
+B) Bloquear accesos no autorizados a un sistema o red
+C) Almacenar copias de seguridad
+D) Detectar virus después de que ya entraron
+
+PREGUNTA 16
+¿Qué es el ciberacoso?
+A) Un deporte electrónico
+B) Acosar, intimidar o humillar a una persona a través de redes sociales o medios digitales
+C) Probar la velocidad de internet
+D) Comprar en línea
+
+PREGUNTA 17
+¿Por qué no se deben abrir enlaces sospechosos en mensajes de texto o correo electrónico?
+A) Porque pueden contener malware o intentos de phishing para robar información
+B) Porque ralentizan el internet
+C) Porque son aburridos
+D) Porque nunca funcionan
+
+PREGUNTA 18
+¿Qué significa "suplantación de identidad" en el contexto de los delitos informáticos?
+A) Robar la identidad física de una persona
+B) Usar la identidad digital de otra persona sin permiso para cometer fraudes o acceder a sus cuentas
+C) Cambiar tu propia identidad en las redes sociales
+D) Usar un seudónimo en un foro
+
+PREGUNTA 19
+¿Cuál es una buena práctica al realizar compras en línea?
+A) Ingresar los datos de tu tarjeta en cualquier página que tenga "lo que quieres"
+B) Usar tarjetas virtuales o métodos de pago seguros y revisar los estados de cuenta regularmente
+C) Compartir tus datos de tarjeta con amigos para ayudarles a comprar
+D) Guardar tu contraseña como "123456" para recordar fácilmente
+
+PREGUNTA 20
+¿Qué dice la Ley 1273 de 2009 sobre la protección de datos personales?
+A) No tiene nada que ver con los datos personales
+B) Establece que obtener, compilar, ofrecer, vender o divulgar datos personales sin autorización es un delito
+C) Permite que cualquier persona use datos personales libremente
+D) Solo protege los datos de las empresas, no de las personas
+
+--- SOLUCIONES CORRECTAS ---
+1-B, 2-B, 3-B, 4-B, 5-B, 6-A, 7-B, 8-B, 9-C, 10-B, 11-A, 12-B, 13-B, 14-B, 15-B, 16-B, 17-A, 18-B, 19-B, 20-B
+
+--- INSTRUCCIONES PARA EL DOCENTE ---
+- Las preguntas 1-20 pueden mezclarse aleatoriamente para cada evaluación.
+- El estudiante puede realizar la evaluación dos veces con preguntas diferentes.
+- Cada vez que se realiza la prueba, las preguntas deben aparecer en orden aleatorio.
