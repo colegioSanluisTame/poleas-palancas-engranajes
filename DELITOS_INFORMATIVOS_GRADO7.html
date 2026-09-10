@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Delitos Informáticos - Grado 7°</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#eef1f5;color:#1a1a2e;line-height:1.6;}
+.container{max-width:960px;margin:0 auto;padding:15px;}
+.portada{background:linear-gradient(135deg,#1a1a2e,#2d1b69,#e94560);color:#fff;padding:45px 25px;border-radius:15px;text-align:center;margin-bottom:15px;box-shadow:0 8px 25px rgba(0,0,0,.2);}
+.portada h1{font-size:2em;margin-bottom:5px;}
+.portada h2{font-size:1.1em;font-weight:400;opacity:.95;}
+.portada .datos-est{background:rgba(255,255,255,.12);padding:15px;border-radius:10px;margin-top:15px;max-width:420px;margin-left:auto;margin-right:auto;}
+.portada .datos-est input{width:100%;padding:9px;margin:4px 0;border:none;border-radius:6px;font-size:.95em;background:rgba(255,255,255,.9);}
+.volver{display:inline-block;margin-bottom:15px;padding:8px 20px;background:#0f3460;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;transition:all .3s;}
+.volver:hover{background:#1a5276;transform:translateY(-2px);}
+.tabs{display:flex;gap:0;margin-bottom:0;background:#1a1a2e;border-radius:12px 12px 0 0;overflow:hidden;}
+.tab-btn{flex:1;padding:13px 8px;border:none;cursor:pointer;font-size:.95em;font-weight:600;transition:all .3s;background:#1a1a2e;color:#8899aa;text-align:center;}
+.tab-btn:hover{background:#2a2a4e;color:#ddd;}
+.tab-btn.activo{background:#fff;color:#0f3460;box-shadow:0 -3px 0 #e94560 inset;}
+.tab-content{display:none;background:#fff;border-radius:0 0 12px 12px;padding:25px;}
+.tab-content.activo{display:block;}
+h2{color:#0f3460;font-size:1.4em;border-bottom:3px solid #e94560;padding-bottom:5px;margin:18px 0 12px 0;}
+h3{color:#16213e;font-size:1.1em;margin:15px 0 8px 0;background:#f0f2f5;padding:7px 12px;border-radius:6px;}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.9em;}
+th,td{border:1px solid #dee2e6;padding:7px;text-align:left;}
+th{background:#0f3460;color:#fff;font-weight:600;}
+tr:nth-child(even){background:#f8f9fa;}
+.formula-box{background:#e8f4fd;border-left:5px solid #0f3460;padding:12px;margin:12px 0;border-radius:0 8px 8px 0;}
+.ejemplo{background:#fef9e7;border-left:5px solid #f1c40f;padding:12px;margin:12px 0;border-radius:0 8px 8px 0;}
+.info-box{background:#e8f5e9;border-left:5px solid #28a745;padding:10px;margin:10px 0;border-radius:0 8px 8px 0;}
+.warning-box{background:#fbe9e7;border-left:5px solid #e94560;padding:10px;margin:10px 0;border-radius:0 8px 8px 0;}
+ul,ol{padding-left:22px;margin:8px 0;}
+li{margin:3px 0;}
+.galeria{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin:15px 0;}
+.galeria-item{text-align:center;background:#f8f9fa;padding:10px;border-radius:10px;border:2px solid #dee2e6;transition:all .3s;}
+.galeria-item:hover{border-color:#0f3460;box-shadow:0 4px 12px rgba(0,0,0,.1);transform:translateY(-3px);}
+.galeria-item svg{max-width:100%;height:auto;}
+.galeria-item .nom{font-weight:700;color:#0f3460;font-size:.85em;margin-top:4px;}
+.galeria-item .uso{font-size:.75em;color:#666;}
+.id-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin:15px 0;}
+.id-card{border:2px solid #dee2e6;border-radius:10px;padding:12px;background:#f8f9fa;text-align:center;transition:all .3s;}
+.id-card:hover{border-color:#0f3460;box-shadow:0 4px 12px rgba(0,0,0,.1);}
+.id-card h5{color:#0f3460;margin:4px 0;font-size:.95em;}
+.id-card .label-tipo{display:inline-block;padding:2px 10px;border-radius:10px;font-size:.75em;font-weight:600;color:#fff;margin:3px 0;}
+.id-card .tipo-peligro{background:#e94560;}
+.id-card .tipo-seguro{background:#28a745;}
+.id-card .tipo-precaucion{background:#f39c12;}
+.ejercicio{background:#f8f9fa;border:1px solid #dee2e6;padding:18px;margin:12px 0;border-radius:10px;border-left:4px solid #e94560;}
+.ejercicio .num-ej{font-weight:700;color:#e94560;font-size:1em;}
+.ejercicio .pista{font-size:.82em;color:#666;background:#eef2f7;padding:5px 10px;border-radius:5px;margin-top:5px;display:inline-block;}
+.pregunta{background:#f8f9fa;border:1px solid #dee2e6;padding:15px;margin:12px 0;border-radius:10px;border-left:4px solid #0f3460;}
+.pregunta .qtext{font-weight:600;margin-bottom:6px;font-size:.98em;}
+.pregunta .opts>div{margin:5px 0;display:flex;align-items:center;gap:8px;}
+.pregunta .opts input{width:17px;height:17px;accent-color:#0f3460;}
+.pregunta .opts label{cursor:pointer;flex:1;font-size:.93em;}
+.respuesta-eval{display:none;margin-top:6px;padding:8px;border-radius:6px;font-size:.9em;}
+.btn{display:inline-block;padding:11px 25px;border:none;border-radius:8px;font-size:.95em;font-weight:600;cursor:pointer;margin:4px;transition:all .3s;}
+.btn-success{background:#28a745;color:#fff;}
+.btn-success:hover{background:#218838;transform:translateY(-2px);}
+.btn-danger{background:#e94560;color:#fff;}
+.btn-danger:hover{background:#c23152;transform:translateY(-2px);}
+.resultado{display:none;background:linear-gradient(135deg,#0f3460,#1a5276);color:#fff;padding:25px;border-radius:12px;text-align:center;margin:20px 0;}
+.resultado.mostrar{display:block;}
+.resultado .nota{font-size:3.2em;font-weight:800;margin:5px 0;}
+.resultado .nota.aprobado{color:#ffd700;}
+.resultado .nota.reprobado{color:#ff6b6b;}
+.contador{font-size:.88em;color:#666;margin-bottom:8px;}
+@media print{.no-print,.tabs{display:none!important;}.tab-content{display:block!important;}}
+@media(max-width:600px){.portada h1{font-size:1.3em;}.tab-btn{font-size:.8em;padding:8px 4px;}.tab-content{padding:12px;}.galeria{grid-template-columns:repeat(2,1fr);}.id-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="container">
+
+<a href="index.html" class="volver no-print">← Volver al menú principal</a>
+
+<!-- PORTADA -->
+<div class="portada">
+    <h1>🛡️ DELITOS INFORMÁTICOS</h1>
+    <h2>Guía + Taller + Evaluación ICFES · Grado 7°</h2>
+    <p style="font-size:.85em;opacity:.85;">Colombia - Educación Digital y Seguridad en Línea</p>
+    <div class="datos-est no-print">
+        <input type="text" id="nombreEst" placeholder="Tu nombre completo">
+        <input type="text" id="cursoEst" placeholder="Curso (ej: 7°A)">
+    </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs no-print">
+    <button class="tab-btn activo" onclick="abrirTab('guia')">📖 Guía</button>
+    <button class="tab-btn" onclick="abrirTab('taller')">✏️ Taller</button>
+    <button class="tab-btn" onclick="abrirTab('evaluacion')">📝 Evaluación</button>
+</div>
+
+<!-- ===================== TAB 1: GUIA ===================== -->
+<div class="tab-content activo" id="tab-guia">
+
+<h2>🛡️ ¿Qué son los delitos informáticos?</h2>
+<p>Los <strong>delitos informáticos</strong> son todas aquellas acciones ilegales que se cometen usando computadoras, teléfonos celulares, internet o cualquier dispositivo electrónico. Quien los comete se llama <strong>delincuente informático</strong> o <strong> hacker malicioso</strong>.</p>
+
+<div class="warning-box">
+    <strong>⚠️ Importante:</strong> En Colombia, los delitos informáticos están tipificados en la <strong>Ley 1273 de 2009</strong> (Ley de Seguridad de la Información). Las penas pueden ir desde prisión hasta multas.
+</div>
+
+<h3>🔸 Principales delitos informáticos</h3>
+<div class="galeria">
+    <div class="galeria-item">
+        <svg viewBox="0 0 120 80" width="110" height="70">
+            <rect x="10" y="5" width="100" height="70" rx="8" fill="#fff" stroke="#0f3460" stroke-width="2"/>
+            <rect x="15" y="10" width="90" height="20" rx="4" fill="#e94560" opacity=".2"/>
+            <text x="60" y="24" text-anchor="middle" font-size="8" fill="#e94560" font-weight="bold">⚠️ ALERTA</text>
+            <text x="60" y="38" text-anchor="middle" font-size="6" fill="#333">Su cuenta ha sido</text>
+            <text x="60" y="47" text-anchor="middle" font-size="6" fill="#333">comprometida</text>
+            <text x="60" y="58" text-anchor="middle" font-size="5" fill="#e94560">Haga clic aquí</text>
+            <text x="60" y="68" text-anchor="middle" font-size="5" fill="#888">www.falso-sitio.com</text>
+        </svg>
+        <div class="nom">Phishing</div>
+        <div class="uso">Suplantación de sitios web para robar datos personales y contraseñas.</div>
+    </div>
+    <div class="galeria-item">
+        <svg viewBox="0 0 120 80" width="110" height="70">
+            <circle cx="60" cy="40" r="30" fill="#fff" stroke="#0f3460" stroke-width="2"/>
+            <text x="60" y="35" text-anchor="middle" font-size="20">🦠</text>
+            <text x="60" y="52" text-anchor="middle" font-size="7" fill="#e94560" font-weight="bold">MALWARE</text>
+            <text x="60" y="62" text-anchor="middle" font-size="5" fill="#666">Virus, troyano, gusano</text>
+        </svg>
+        <div class="nom">Malware</div>
+        <div class="uso">Programas maliciosos que dañan o roban información del dispositivo.</div>
+    </div>
+    <div class="galeria-item">
+        <svg viewBox="0 0 120 80" width="110" height="70">
+            <rect x="10" y="5" width="100" height="70" rx="8" fill="#fff" stroke="#0f3460" stroke-width="2"/>
+            <circle cx="40" cy="35" r="12" fill="#e94560" opacity=".2"/>
+            <text x="40" y="40" text-anchor="middle" font-size="14">😠</text>
+            <line x1="60" y1="25" x2="100" y2="25" stroke="#0f3460" stroke-width="1.5"/>
+            <text x="60" y="35" text-anchor="start" font-size="5" fill="#333">Te odio, eres un</text>
+            <text x="60" y="43" text-anchor="start" font-size="5" fill="#333">inútil... nadie te</text>
+            <text x="60" y="51" text-anchor="start" font-size="5" fill="#333">quiere</text>
+            <text x="60" y="65" text-anchor="start" font-size="6" fill="#e94560" font-weight="bold">Ciberacoso</text>
+        </svg>
+        <div class="nom">Ciberacoso</div>
+        <div class="uso">Amenazas, insultos o intimidación a través de redes sociales o mensajes.</div>
+    </div>
+    <div class="galeria-item">
+        <svg viewBox="0 0 120 80" width="110" height="70">
+            <rect x="10" y="5" width="100" height="70" rx="8" fill="#fff" stroke="#0f3460" stroke-width="2"/>
+            <text x="60" y="22" text-anchor="middle" font-size="8" fill="#0f3460" font-weight="bold">ROBO DE IDENTIDAD</text>
+            <rect x="15" y="28" width="45" height="30" rx="3" fill="#e94560" opacity=".1" stroke="#e94560" stroke-width="1"/>
+            <text x="37" y="42" text-anchor="middle" font-size="6" fill="#333">C.C: 1020***</text>
+            <text x="37" y="50" text-anchor="middle" font-size="6" fill="#333">Tel: 310***</text>
+            <rect x="65" y="28" width="40" height="30" rx="3" fill="#888" opacity=".2" stroke="#888" stroke-width="1"/>
+            <text x="85" y="42" text-anchor="middle" font-size="6" fill="#333">¿Quién</text>
+            <text x="85" y="50" text-anchor="middle" font-size="6" fill="#333">soy?</text>
+        </svg>
+        <div class="nom">Robo de Identidad</div>
+        <div class="uso">Usar datos personales de otra persona sin su permiso.</div>
+    </div>
+</div>
+
+<h3>🔸 Más delitos informáticos</h3>
+<div class="galeria">
+    <div class="galeria-item">
+        <svg viewBox="0 0 120 80" width="110" height="70">
+            <rect x="10" y="5" width="100" height="70" rx="8" fill="#fff" stroke="#0f3460" stroke-width="2"/>
+            <text x="60" y="22" text-anchor="middle" font-size="7" fill="#0f3460" font-weight="bold">HACKING</text>
+            <rect x="20" y="28" width="80" height="35" rx="3" fill="#1a1a2e"/>
+            <text x="60" y="42" text-anchor="middle" font-size="6" fill="#0f0">root@system:~$</text>
+            <text x="60" y="52" text-anchor="middle" font-size="6" fill="#0f0">acceso_no_autorizado</text>
+        </svg>
+        <div class="nom">Hacking no autorizado</div>
+        <div class="uso">Acceder a sistemas o cuentas sin permiso del propietario.</div>
+    </div>
+    <div class="galeria-item">
+        <svg viewBox="0 0 120 80" width="110" height="70">
+            <rect x="10" y="5" width="100" height="70" rx="8" fill="#fff" stroke="#0f3460" stroke-width="2"/>
+            <text x="60" y="22" text-anchor="middle" font-size="7" fill="#0f3460" font-weight="bold">EXTORSIÓN</text>
+            <text x="60" y="40" text-anchor="middle" font-size="18">💰</text>
+            <text x="60" y="55" text-anchor="middle" font-size="6" fill="#e94560">"Paga o publico tus fotos"</text>
+        </svg>
+        <div class="nom">Ciberextorsión</div>
+        <div class="uso">Amenazar con publicar información privada para exigir dinero.</div>
+    </div>
+    <div class="galeria-item">
+        <svg viewBox="0 0 120 80" width="110" height="70">
+            <rect x="10" y="5" width="100" height="70" rx="8" fill="#fff" stroke="#0f3460" stroke-width="2"/>
+            <text x="60" y="22" text-anchor="middle" font-size="7" fill="#0f3460" font-weight="bold">INGENIERÍA SOCIAL</text>
+            <text x="60" y="40" text-anchor="middle" font-size="18">🎭</text>
+            <text x="60" y="55" text-anchor="middle" font-size="6" fill="#e94560">"Soy tu amigo de confianza"</text>
+        </svg>
+        <div class="nom">Ingeniería Social</div>
+        <div class="uso">Manipular a las personas para obtener información confidencial.</div>
+    </div>
+    <div class="galeria-item">
+        <svg viewBox="0 0 120 80" width="110" height="70">
+            <rect x="10" y="5" width="100" height="70" rx="8" fill="#fff" stroke="#0f3460" stroke-width="2"/>
+            <text x="60" y="22" text-anchor="middle" font-size="7" fill="#0f3460" font-weight="bold">SECUESTRO DIGITAL</text>
+            <text x="60" y="40" text-anchor="middle" font-size="18">🔒</text>
+            <text x="60" y="55" text-anchor="middle" font-size="6" fill="#e94560">Ransomware: tus datos encriptados</text>
+        </svg>
+        <div class="nom">Secuestro Digital</div>
+        <div class="uso">Bloquear archivos y pedir rescate para devolver el acceso.</div>
+    </div>
+    <div class="galeria-item">
+        <svg viewBox="0 0 120 80" width="110" height="70">
+            <rect x="10" y="5" width="100" height="70" rx="8" fill="#fff" stroke="#0f3460" stroke-width="2"/>
+            <text x="60" y="22" text-anchor="middle" font-size="7" fill="#0f3460" font-weight="bold">CORREO NO DESEADO</text>
+            <rect x="15" y="28" width="40" height="10" rx="2" fill="#e94560" opacity=".2"/>
+            <text x="35" y="36" text-anchor="middle" font-size="5" fill="#333">📧 Spam</text>
+            <rect x="65" y="28" width="40" height="10" rx="2" fill="#f39c12" opacity=".2"/>
+            <text x="85" y="36" text-anchor="middle" font-size="5" fill="#333">🎰 Sorteo falso</text>
+            <text x="60" y="55" text-anchor="middle" font-size="6" fill="#666">Mensajes masivos engañosos</text>
+        </svg>
+        <div class="nom">Spam y fraudes</div>
+        <div class="uso">Envío masivo de correos o mensajes engañosos para robar datos.</div>
+    </div>
+</div>
+
+<h2>🔑 ¿Cómo protegerte?</h2>
+<div class="info-box">
+    <strong>💡 Consejos de seguridad digital:</strong>
+    <ul>
+        <li><strong>Contraseñas seguras:</strong> Usa letras, números y símbolos. Nunca uses datos personales como fecha de nacimiento.</li>
+        <li><strong>No compartas contraseñas:</strong> Ni con amigos ni con familiares.</li>
+        <li><strong>Verifica los enlaces:</strong> Antes de hacer clic, revisa que la dirección web sea legítima.</li>
+        <li><strong>No aceptes mensajes de desconocidos:</strong> En redes sociales o por correo.</li>
+        <li><strong>Actualiza tu dispositivo:</strong> Las actualizaciones corrigen errores de seguridad.</li>
+        <li><strong>Usa autenticación de dos factores:</strong> Es como tener dos candados en lugar de uno.</li>
+        <li><strong>Confía en tu instinto:</strong> Si algo se ve sospechoso, probablemente lo es.</li>
+    </ul>
+</div>
+
+<h3>🔸 ¿Qué hacer si eres víctima?</h3>
+<ol>
+    <li><strong>No respondas</strong> al agresor</li>
+    <li><strong>Guarda pruebas</strong> (capturas de pantalla)</li>
+    <li><strong>Bloquea</strong> al agresor</li>
+    <li><strong>Cuenta a un adulto</strong> de confianza (padres, profesor)</li>
+    <li><strong>Denuncia</strong> ante la policía (Línea 122 o CAI más cercano)</li>
+</ol>
+
+<div class="ejemplo">
+    <strong>🔹 Datos importantes en Colombia:</strong><br>
+    • <strong>Línea 122:</strong> Atención a niños, niñas y adolescentes<br>
+    • <strong>Policía Nacional:</strong> www.policia.gov.co<br>
+    • <strong>GAULA:</strong> Grupo de Acción Unificada contra el Delito Informático<br>
+    • <strong>Ley 1273 de 2009:</strong> Protege la información y los datos personales
+</div>
+
+<h2>⚖️ Consecuencias legales</h2>
+<table>
+    <tr><th>Delito</th><th>Descripción</th><th>Pena aproximada</th></tr>
+    <tr><td>Acceso no autorizado</td><td>Entrar a sistemas sin permiso</td><td>4 a 8 años de prisión</td></tr>
+    <tr><td>Interceptación de datos</td><td>Leer mensajes o correos ajenos</td><td>4 a 8 años de prisión</td></tr>
+    <tr><td>Daño de información</td><td>Borrar o alterar archivos ajenos</td><td>4 a 8 años de prisión</td></tr>
+    <tr><td>Extorsión digital</td><td>Amenazar para obtener dinero</td><td>6 a 12 años de prisión</td></tr>
+    <tr><td>Ciberacoso</td><td>Amenazar o intimidar en línea</td><td>1 a 3 años (menores)</td></tr>
+</table>
+
+</div><!-- /tab-guia -->
+
+<!-- ===================== TAB 2: TALLER ===================== -->
+<div class="tab-content" id="tab-taller">
+
+<h2>✏️ TALLER PRÁCTICO</h2>
+<p><strong>Nombre:</strong> <span id="tallerNombre">______________</span> | <strong>Curso:</strong> <span id="tallerCurso">______________</span></p>
+<p style="background:#fef9e7;padding:10px;border-radius:8px;border-left:4px solid #f1c40f;">
+📌 <strong>Instrucciones:</strong> Observa bien las imágenes, identifica cada tipo de delito informático y resuelve los ejercicios en tu cuaderno.
+</p>
+
+<!-- ===== ACTIVIDAD 1: IDENTIFICAR DELITOS ===== -->
+<h3>📍 ACTIVIDAD 1: ¿Qué tipo de delito informático es?</h3>
+<p>Observa cada imagen y escribe si se trata de: <strong>Phishing, Malware, Ciberacoso, Robo de identidad, Hacking, Ciberextorsión, Ingeniería social, Secuestro digital o Spam.</strong></p>
+
+<div class="galeria" style="grid-template-columns:repeat(3,1fr);">
+    <div class="galeria-item">
+        <svg viewBox="0 0 100 90" width="90" height="80">
+            <rect x="5" y="5" width="90" height="80" rx="6" fill="#fff" stroke="#0f3460" stroke-width="2"/>
+            <rect x="10" y="10" width="80" height="20" rx="3" fill="#e94560" opacity=".2"/>
+            <text x="50" y="24" text-anchor="middle" font-size="7" fill="#e94560" font-weight="bold">BANCO FALSO</text>
+            <text x="50" y="40" text-anchor="middle" font-size="6" fill="#333">"Su cuenta será bloqueada"</text>
+            <text x="50" y="50" text-anchor="middle" font-size="6" fill="#333">"Ingrese sus datos aquí"</text>
+            <text x="50" y="65" text-anchor="middle" font-size="5" fill="#e94560">www.banco-falso.com</text>
+            <text x="50" y="80" text-anchor="middle" font-size="7" fill="#0f3460">Situación A</text>
+        </svg>
+    </div>
+    <div class="galeria-item">
+        <svg viewBox="0 0 100 90" width="90" height="80">
+            <rect x="5" y="5" width="90" height="80" rx="6" fill="#fff" stroke="#0f3460" stroke-width="2"/>
+            <text x="50" y="22" text-anchor="middle" font-size="6" fill="#0f3460" font-weight="bold">REDES SOCIALES</text>
+            <rect x="10" y="28" width="80" height="12" rx="2" fill="#f8f9fa" stroke="#dee2e6"/>
+            <text x="50" y="37" text-anchor="middle" font-size="5" fill="#e94560">"Eres un perdedor, nadie te quiere"</text>
+            <rect x="10" y="44" width="80" height="12" rx="2" fill="#f8f9fa" stroke="#dee2e6"/>
+            <text x="50" y="53" text-anchor="middle" font-size="5" fill="#e94560">"Voy a publicar tus fotos"</text>
+            <rect x="10" y="60" width="80" height="12" rx="2" fill="#f8f9fa" stroke="#dee2e6"/>
+            <text x="50" y="69" text-anchor="middle" font-size="5" fill="#e94560">"Si no me das dinero..."</text>
+            <text x="50" y="85" text-anchor="middle" font-size="7" fill="#0f3460">Situación B</text>
+        </svg>
+    </div>
+    <div class="galeria-item">
+        <svg viewBox="0 0 100 90" width="90" height="80">
+            <rect x="5" y="5" width="90" height="80" rx="6" fill="#fff" stroke="#0f3460" stroke-width="2"/>
+            <rect x="10" y="10" width="80" height="30" rx="3" fill="#1a1a2e"/>
+            <text x="50" y="22" text-anchor="middle" font-size="5" fill="#0f0">C:\Users\victima\Documents</text>
+            <text x="50" y="32" text-anchor="middle" font-size="5" fill="#e94560">ACCESO NO AUTORIZADO</text>
+            <text x="50" y="50" text-anchor="middle" font-size="6" fill="#333">Alguien entró a la computadora</text>
+            <text x="50" y="60" text-anchor="middle" font-size="6" fill="#333">sin permiso y copió archivos</text>
+            <text x="50" y="75" text-anchor="middle" font-size="5" fill="#e94560">Archivos: CC, fotos, contraseñas</text>
+            <text x="50" y="85" text-anchor="middle" font-size="7" fill="#0f3460">Situación C</text>
+        </svg>
+    </div>
+</div>
+
+<div class="ejercicio">
+    <p><span class="num-ej">Ejercicio 1.</span> Identifica el delito en cada situación:</p>
+    <p>Situación A: ____________________<br>
+       Situación B: ____________________<br>
+       Situación C: ____________________</p>
+</div>
+
+<!-- ===== ACTIVIDAD 2: ¿ES SEGURO O NO? ===== -->
+<h3>📍 ACTIVIDAD 2: ¿Es seguro o no?</h3>
+<p>Lee cada situación y decide si es <strong style="color:#28a745;">SEGURO</strong> o si representa un <strong style="color:#e94560;">RIESGO</strong>.</p>
+
+<div class="id-grid" style="grid-template-columns:repeat(2,1fr);">
+    <div class="id-card">
+        <h5>📧 Un amigo te envía un enlace por WhatsApp</h5>
+        <p style="font-size:.85em;">El enlace dice "¡Gana un celular gratis! Haz clic aquí"</p>
+        <p style="font-size:.8em;">¿Seguro o riesgo? → _______</p>
+    </div>
+    <div class="id-card">
+        <h5>🔑 Tienes la misma contraseña para todo</h5>
+        <p style="font-size:.85em;">Instagram, correo, WhatsApp, videojuegos... todo con "123456"</p>
+        <p style="font-size:.8em;">¿Seguro o riesgo? → _______</p>
+    </div>
+    <div class="id-card">
+        <h5>👥 Aceptas la solicitud de amistad de un desconocido</h5>
+        <p style="font-size:.85em;">La persona tiene poca información y pocas fotos</p>
+        <p style="font-size:.8em;">¿Seguro o riesgo? → _______</p>
+    </div>
+    <div class="id-card">
+        <h5>🔒 Activas la verificación en dos pasos</h5>
+        <p style="font-size:.85em;">En tu cuenta de Instagram activates la autenticación de dos factores</p>
+        <p style="font-size:.8em;">¿Seguro o riesgo? → _______</p>
+    </div>
+    <div class="id-card">
+        <h5>📱 Dejas tu celular desbloqueado en la mesa</h5>
+        <p style="font-size:.85em;">En el salón de clase, con acceso libre a tus apps</p>
+        <p style="font-size:.8em;">¿Seguro o riesgo? → _______</p>
+    </div>
+    <div class="id-card">
+        <h5>💾 Haces copia de seguridad de tus archivos</h5>
+        <p style="font-size:.85em;">Guardas tus fotos y documentos importantes en la nube</p>
+        <p style="font-size:.8em;">¿Seguro o riesgo? → _______</p>
+    </div>
+</div>
+
+<!-- ===== ACTIVIDAD 3: ESCENARIOS ===== -->
+<h3>📍 ACTIVIDAD 3: ¿Qué harías tú?</h3>
+
+<div class="ejercicio">
+    <p><span class="num-ej">Ejercicio 2.</span> Lee cada escenario y escribe qué harías en ese caso:</p>
+    
+    <p><strong>Escenario 1:</strong> Un compañero de clase te dice que encontró una página donde puedes obtener skins gratis para tu juego favorito. Solo tienes que ingresar tu contraseña. ¿Qué haces?</p>
+    <p>Tu respuesta: ________________________________________________________</p>
+    
+    <p><strong>Escenario 2:</strong> Recibes un correo que dice ser de tu banco. Te pide que actualices tus datos personales porque "tu cuenta será bloqueada". El correo tiene errores ortográficos. ¿Qué haces?</p>
+    <p>Tu respuesta: ________________________________________________________</p>
+    
+    <p><strong>Escenario 3:</strong> Alguien en las redes sociales te amenaza con publicar fotos tuyas si no le envías dinero. ¿Qué haces?</p>
+    <p>Tu respuesta: ________________________________________________________</p>
+    
+    <p><strong>Escenario 4:</strong> Tu amigo te pide que le prestes tu contraseña de Netflix para que él también pueda ver series. ¿Qué le dices?</p>
+    <p>Tu respuesta: ________________________________________________________</p>
+</div>
+
+<!-- ===== ACTIVIDAD 4: DIBUJA Y CREA ===== -->
+<h3>📍 ACTIVIDAD 4: Crea tu campaña de seguridad</h3>
+
+<div class="ejercicio">
+    <p><span class="num-ej">Ejercicio 3.</span> Diseña un póster o cartel de seguridad digital para tu colegio. Incluye:</p>
+    <p>a) Un título llamativo sobre prevención de delitos informáticos<br>
+       b) Al menos 3 consejos de seguridad<br>
+       c) Un dibujo o imagen que refuerce el mensaje<br>
+       d) Los números de ayuda (Línea 122, Policía)</p>
+</div>
+
+<div class="ejercicio">
+    <p><span class="num-ej">Ejercicio 4.</span> Completa el crucigrama digital:</p>
+    <table>
+        <tr><th>Pista</th><th>Respuesta</th></tr>
+        <tr><td>Suplantación de sitios web para robar datos</td><td>P _ _ _ _ _ _ _</td></tr>
+        <tr><td>Programas maliciosos que dañan el dispositivo</td><td>M _ _ _ _ _ _</td></tr>
+        <tr><td>Acoso a través de redes sociales</td><td>C _ _ _ _ _ _ _ _ _ _ _</td></tr>
+        <tr><td>Usar datos de otra persona sin permiso</td><td>R _ _ _ de _ _ _ _ _ _ _</td></tr>
+        <tr><td>Acceder a sistemas sin autorización</td><td>H _ _ _ _ _ _ _</td></tr>
+    </table>
+</div>
+
+</div><!-- /tab-taller -->
+
+<!-- ===================== TAB 3: EVALUACION ===================== -->
+<div class="tab-content" id="tab-evaluacion">
+
+<h2>📝 EVALUACIÓN TIPO ICFES</h2>
+<p><strong>20 preguntas de selección múltiple con única respuesta.</strong> Lee cada pregunta y selecciona la opción correcta.</p>
+<p class="contador" id="contadorEval">0 de 20 respondidas</p>
+<div id="preguntasEval"></div>
+<div class="resultado" id="resultadoEval">
+    <h2>📊 RESULTADO</h2>
+    <div class="nota" id="notaEval">0.0</div>
+    <p id="detalleEval"></p>
+    <p id="mensajeEval" style="font-size:1.1em;margin-top:8px;"></p>
+</div>
+<div class="no-print" style="text-align:center;margin-top:15px;">
+    <button class="btn btn-success" onclick="calificarEval()">✅ Calificar</button>
+    <button class="btn btn-danger" onclick="reiniciarEval()">🔄 Reiniciar</button>
+</div>
+</div>
+
+</div><!-- /container -->
+
+<script>
+function abrirTab(n){document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('activo'));document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('activo'));document.getElementById('tab-'+n).classList.add('activo');document.querySelector(`[onclick*="'${n}'"]`).classList.add('activo');}
+document.addEventListener('DOMContentLoaded',function(){const ni=document.getElementById('nombreEst'),ci=document.getElementById('cursoEst');if(ni)ni.addEventListener('input',function(){document.getElementById('tallerNombre').textContent=this.value||'______________';});if(ci)ci.addEventListener('input',function(){document.getElementById('tallerCurso').textContent=this.value||'______________';});initEval();});
+
+const banco=[
+{q:"¿Qué es el phishing?",opts:["Un tipo de virus","Una técnica para robar datos suplantando sitios web","Un programa de protección","Una red social"],ans:1},
+{q:"Cuál es la Ley colombiana que protege la información digital?",opts:["Ley 1273 de 2009","Ley 50 de 1990","Ley 100 de 1993","Ley 23 de 2015"],ans:0},
+{q:"¿Qué debes hacer si recibes un mensaje amenazante en redes sociales?",opts:["Responder al agresor","Borrar el mensaje y no hacer nada","Guardar pruebas y contar a un adulto","Enviar dinero al agresor"],ans:2},
+{q:"¿Qué es el malware?",opts:["Un tipo de contraseña","Un programa malicioso que daña dispositivos","Una actualización del sistema","Una red social segura"],ans:1},
+{q:"¿Cuál de estas es una contraseña segura?",opts:["123456","MiFechaNacimiento","Juan2024!@#","Contraseña"],ans:2},
+{q:"¿Qué es el ciberacoso?",opts:["Descargar música gratis","Amenazar o intimidar a alguien por internet","Comprar en línea","Usar WiFi público"],ans:1},
+{q:"¿A qué número debes llamar en Colombia si eres víctima de un delito informático?",opts:["123","122","911","141"],ans:1},
+{q:"¿Qué es la ingeniería social?",opts:["Usar redes sociales","Manipular a personas para obtener información confidencial","Hacer deberes de ingeniería","Programar computadoras"],ans:1},
+{q:"¿Cuál de estas acciones es un delito informático?",opts:["Usar WiFi del colegio","Acceder a cuentas ajenas sin permiso","Descargar apps gratuitas","Ver videos en YouTube"],ans:1},
+{q:"¿Qué es el ciberextorsión?",opts:["Amenazar con publicar información privada para exigir dinero","Hacer amigos en internet","Compartir fotos familiares","Jugar en línea"],ans:0},
+{q:"¿Por qué no debes aceptar solicitudes de amistad de desconocidos?",opts:["Porque son aburridos","Porque podrían ser delincuentes informáticos","Porque no tienen fotos","Porque hablan otro idioma"],ans:1},
+{q:"¿Qué es el secuestro digital (ransomware)?opts:["Secuestrar una computadora física","Bloquear archivos y pedir rescate por ellos","Enviar correos masivos","Descargar películas gratis"],ans:1},
+{q:"¿Cuál es la mejor forma de proteger tu información?",opts:["Compartir tu contraseña con amigos","Usar la misma contraseña en todas partes","Actualizar tu dispositivo y usar contraseñas seguras","No usar internet"],ans:2},
+{q:"¿Qué es la autenticación de dos factores?",opts:["Usar dos contraseñas iguales","Un segundo nivel de seguridad además de la contraseña","Tener dos correos electrónicos","Usar dos dispositivos a la vez"],ans:1},
+{q:"¿Es seguro hacer clic en enlaces de correos o mensajes desconocidos?",opts:["Sí, siempre es seguro","No, pueden ser de phishing","Solo si ofrecen premios","Depende del color del enlace"],ans:1},
+{q:"¿Qué debes hacer si ves un mensaje de ciberacoso hacia un compañero?",opts:["Ignorarlo","Compartirlo para que más personas lo vean","Reportarlo a un adulto y apoyar a la víctima","Unirse al acoso"],ans:2},
+{q:"¿Cuál de estas es una buena práctica de seguridad digital?",opts:["Dejar tu celular desbloqueado","No actualizar nunca tu teléfono","Hacer copias de seguridad de tus archivos","Compartir tu ubicación con desconocidos"],ans:2},
+{q:"¿Qué es el robo de identidad digital?",opts:["Robar un celular","Usar datos personales de otra persona sin permiso","Comprar en línea","Descargar música"],ans:1},
+{q:"¿Por qué es peligioso usar WiFi público sin protección?",opts:["Porque es lento","Porque los delincuentes pueden interceptar tus datos","Porque cobra dinero","Porque no funciona bien"],ans:1},
+{q:"¿Cuál es la pena aproximada por acceder a sistemas informáticos sin autorización en Colombia?",opts:["1 mes de prisión","No hay pena","4 a 8 años de prisión","Solo una multa de $10.000"],ans:2},
+{q:"¿Qué es el spam?",opts:["Un tipo de virus","Mensajes o correos no deseados masivos","Una red social","Un programa de seguridad"],ans:1},
+{q:"¿Debes dar tu contraseña a tus mejores amigos?",opts:["Sí, porque son de confianza","No, las contraseñas son personales","Solo si te lo piden por favor","Depende del颜色"],ans:1},
+{q:"¿Qué es un troyano informático?",opts:["Un caballo de madera","Un programa que se disfraza de algo útil pero es malicioso","Un juego popular","Un tipo de contraseña"],ans:1},
+{q:"¿Cuál de estas es una señal de phishing?",opts:["Correo de tu banco con errores ortográficos y urgencia","Mensaje de tu mamá","Notificación de actualización de tu teléfono","Chat de un juego"],ans:0},
+{q:"¿Qué hacer si un desconocido te pide información personal en redes sociales?",opts:["Darle toda tu información","Ignorarlo y reportarlo","Responderle con humor","Hacerte pasar por otra persona"],ans:1},
+];
+
+let preguntas=[],respuestas=[];
+function shuffleArray(a){for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function initEval(){const s=shuffleArray([...banco]);preguntas=s.slice(0,20);respuestas=new Array(20).fill(null);const c=document.getElementById('preguntasEval');c.innerHTML='';const l=['A','B','C','D'];preguntas.forEach((p,i)=>{const d=document.createElement('div');d.className='pregunta';d.id='pe-'+i;let opts='<div class="opts">';p.opts.forEach((o,oi)=>{opts+=`<div><input type="radio" name="e${i}" value="${oi}" id="e${i}-${oi}" onchange="marcarE(${i},${oi})"><label for="e${i}-${oi}"><strong>${l[oi]}.</strong> ${o}</label></div>`;});opts+='</div>';d.innerHTML=`<div class="qtext">${i+1}. ${p.q}</div>${opts}<div class="respuesta-eval" id="re-${i}"></div>`;c.appendChild(d);});document.getElementById('contadorEval').textContent='0 de 20 respondidas';document.getElementById('resultadoEval').classList.remove('mostrar');}
+function marcarE(i,v){respuestas[i]=v;const r=respuestas.filter(x=>x!==null).length;document.getElementById('contadorEval').textContent=r+' de 20 respondidas';}
+function calificarEval(){let c=0;const l=['A','B','C','D'];preguntas.forEach((p,i)=>{const card=document.getElementById('pe-'+i),rd=document.getElementById('re-'+i);const radios=card.querySelectorAll('input[type="radio"]');radios.forEach((r,oi)=>{r.disabled=true;const lb=r.nextElementSibling;if(oi===p.ans){lb.style.color='#28a745';lb.style.fontWeight='bold';}if(respuestas[i]!==null&&respuestas[i]!==p.ans&&oi===respuestas[i]){lb.style.color='#dc3545';lb.style.fontWeight='bold';}});const ic=respuestas[i]===p.ans?'✅':'❌';rd.style.display='block';rd.innerHTML=`${ic} <b>Resp:</b> ${l[p.ans]}. ${p.opts[p.ans]}`;if(respuestas[i]===p.ans){c++;rd.style.background='#d4edda';rd.style.color='#155724';}else{rd.style.background='#f8d7da';rd.style.color='#721c24';}});const n=(c/preguntas.length)*5,e=document.getElementById('notaEval');e.textContent=n.toFixed(1);e.className='nota '+(n>=3.0?'aprobado':'reprobado');document.getElementById('detalleEval').innerHTML=`✅ ${c}/${preguntas.length} correctas | ❌ ${preguntas.length-c} incorrectas`;document.getElementById('mensajeEval').textContent=n>=4.5?'🌟 Excelente! Dominas la seguridad digital.':n>=3.0?'👍 Bien, pero repasa los temas que fallaste.':'📚 Necesitas repasar. Vuelve a la guía e intenta de nuevo.';document.getElementById('resultadoEval').classList.add('mostrar');}
+function reiniciarEval(){initEval();}
+</script>
+</body>
+</html>
